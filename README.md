@@ -6,6 +6,7 @@
 - Prisma
 - postgresql
 - JWT
+- Vitest
 
 
  ## What the api should do?
