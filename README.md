@@ -10,7 +10,7 @@
 
  ## What the api should do?
  
- <input type="checkbox"> - Should be able to create a user. </br>
+<input type="checkbox" name="opcional[]" value="queijo"> - Should be able to create a user. </br>
  [] - Should be able to authenticate a user.  </br>
  [] - Should be able to update a user. </br>
  [] - Should be able to delete a account. </br>
