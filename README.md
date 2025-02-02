@@ -10,18 +10,18 @@
 
  ## What the api should do?
  
- [] - Should be able to create a user.
- [] - Should be able to authenticate a user.
- [] - Should be able to update a user.
- [] - Should be able to delete a account.
- [] - User should be able to create a product.
- [] - User should be able to update a product if he's created by the user.
- [] - User should be able to delete a product if he's created by the user.
- [] - User should be able to sell your product to other user.
- [] - User should be able to search products.
- [] - User should be able to get a list of your products.
- [] - User should be able to get a list of your past sells.
- [] - User shoud be able to get a list of your buys.
+ [] - Should be able to create a user. </br>
+ [] - Should be able to authenticate a user.  </br>
+ [] - Should be able to update a user. </br>
+ [] - Should be able to delete a account. </br>
+ [] - User should be able to create a product. </br>
+ [] - User should be able to update a product if he's created by the user. </br>
+ [] - User should be able to delete a product if he's created by the user. </br>
+ [] - User should be able to sell your product to other user. </br>
+ [] - User should be able to search products. </br>
+ [] - User should be able to get a list of your products. </br>
+ [] - User should be able to get a list of your past sells. </br>
+ [] - User shoud be able to get a list of your buys. </br>
   
  
 ## How to use
