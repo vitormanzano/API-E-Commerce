@@ -1,7 +1,6 @@
-import { Request, Response, Router } from "express";
+import { FastifyInstance } from "fastify";
+import { registerUser } from "./controllers/users/register-user/register-user";
 
-export const router = Router();
-
-router.get('/', (req: Request, res: Response) => {
-    res.status(200).send("Aplicação rodando");
-});
+export async function userRoutes(app: FastifyInstance) {
+    app.post('/users', registerUser);
+}

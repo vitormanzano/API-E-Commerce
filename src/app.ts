@@ -1,12 +1,6 @@
-import express from 'express';
-import { router } from './routes'
+import fastify from  'fastify'
+import { userRoutes } from './routes';
 
-export function createApp() {
-    const app = express();
+export const app = fastify();
 
-    app.use(express.json());
-
-    app.use('/api', router);
-
-    return app;
-}
+ app.register(userRoutes);
