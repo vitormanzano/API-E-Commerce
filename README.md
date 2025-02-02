@@ -14,7 +14,7 @@
  [] - Should be able to create a user. </br>
  [] - Should be able to authenticate a user.  </br>
  [] - Should be able to update a user. </br>
- [] - Should be able to delete a account. </br>
+ [] - Should be able to delete a user. </br>
  [] - User should be able to create a product. </br>
  [] - User should be able to update a product if he's created by the user. </br>
  [] - User should be able to delete a product if he's created by the user. </br>
@@ -23,6 +23,7 @@
  [] - User should be able to get a list of your products. </br>
  [] - User should be able to get a list of your past sells. </br>
  [] - User shoud be able to get a list of your buys. </br>
+ [] - User should be able to get a list of products of their most nearby sellers.
   
  
 ## How to use
