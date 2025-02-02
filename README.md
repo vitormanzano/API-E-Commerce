@@ -8,7 +8,7 @@
 - JWT
 
 
- # What the api should do?
+ ## What the api should do?
  
  [] - Should be able to create a user.
  [] - Should be able to authenticate a user.
@@ -24,7 +24,7 @@
  [] - User shoud be able to get a list of your buys.
   
  
-# How to use
+## How to use
 If u see the project and the tsconfig and the builds in package is good for you, the only thing u need to do is in your vscode terminal, write the command: npm install.
 The dependencies will be installed in your project and is good to start!
 
