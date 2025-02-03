@@ -22,7 +22,7 @@ export class RegisterPersonService {
     async execute(personData: IRegisterPersonServiceRequest): Promise<IRegisterPersonServiceResponse> {
         const hasExistPerson = await this.personsRepository.findPersonByEmail(personData.email);
 
-        if (!hasExistPerson) {
+        if (hasExistPerson) {
             throw new PersonAlreadyExistsError();
         }
 
