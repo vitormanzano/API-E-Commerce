@@ -50,7 +50,7 @@ describe('Register person service', async () => {
 
     });
 
-    it('Should not be able to register with same email twice', async () => {
+    it('Should not be able to register a person with same email twice', async () => {
         const personData = {
             guid: randomUUID(),
             name: 'John doe',
@@ -66,7 +66,7 @@ describe('Register person service', async () => {
 
     });
 
-    it('Should not be able to register a user if password have less than 6 characters', async () => {
+    it('Should not be able to register a person if password have less than 6 characters', async () => {
         const personData = {
             guid: randomUUID(),
             name: 'John doe',

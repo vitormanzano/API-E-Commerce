@@ -11,22 +11,25 @@
 
  ## What the api should do?
  
- [] - Should be able to create a person. </br>
- [] - Should be able to authenticate a person.  </br>
- [] - Should be able to update a person. </br>
- [] - Should be able to delete a person. </br>
- [] - Person should be able to create a product. </br>
- [] - Person should be able to update a product if he's created by the person. </br>
- [] - Person should be able to delete a product if he's created by the person. </br>
- [] - Person should be able to sell your product to other person. </br>
- [] - Person should be able to search products. </br>
- [] - Person should be able to get a list of your products. </br>
- [] - Person should be able to get a list of your past sells. </br>
- [] - Person shoud be able to get a list of your buys. </br>
- [] - Person should be able to get a list of products of their most nearby sellers.
+ The API should be able to: 
+ [x] - Create a person. </br>
+ [] - Authenticate a person.  </br>
+ [] - Update a person. </br>
+ [] - Delete a person. </br>
+
+ The person should also be able to:
+ [] - Create a product. </br>
+ [] - Update a product if it has been created by the person. </br>
+ [] - Delete a product if it has been created by the person. </br>
+ [] - Sell his product to other person. </br>
+ [] - Search products. </br>
+ [] - Get a list of her products. </br>
+ [] - Get a list of your his former sales. </br>
+ [] - Get a list of your buys. </br>
+ [] - Get a list of products from their closest salespeople.
   
  
 ## How to use
-If u see the project and the tsconfig and the builds in package is good for you, the only thing u need to do is in your vscode terminal, write the command: npm install.
-The dependencies will be installed in your project and is good to start!
+If you have checked the project and the tsconfig and the builds in the package fit your needs, the only thing you need to do is to write the command: npm install. in your vscode terminal.
+The dependencies will be installed in your project, and it will be good to go!
 
