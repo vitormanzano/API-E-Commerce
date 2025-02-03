@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
-import { makeRegisterService } from "../../../factories/make-register-user-service";
-import { IRegisterUserServiceRequest} from "../../../services/user/register/register-user-service";
+import { makeRegisterService } from "../../../factories/make-register-person-service";
+import { IRegisterPersonServiceRequest} from "../../../services/person/register/register-person-service";
 
-export const registerUser = async (request: FastifyRequest, reply: FastifyReply) => {
+export const registerPerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({
         name: z.string().min(1, "Name is mandatory"),
         email: z.string().email("Digit a valid email!"),
@@ -12,12 +12,12 @@ export const registerUser = async (request: FastifyRequest, reply: FastifyReply)
         longitude: z.number().min(-180).max(180)
     });
     
-    const registerUserBody = registerBodySchema.parse(request.body) as IRegisterUserServiceRequest;
+    const registerPersonBody = registerBodySchema.parse(request.body) as IRegisterPersonServiceRequest;
 
     try {
-        const registerUserService = makeRegisterService();
+        const registerPersonService = makeRegisterService();
 
-        await registerUserService.execute(registerUserBody);
+        await registerPersonService.execute(registerPersonBody);
     }
 
     catch (error) {
