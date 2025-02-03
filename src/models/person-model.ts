@@ -3,6 +3,6 @@ export interface IPersonModel {
     name: string,
     email: string,
     password: string,
-    latidude: number,
+    latitude: number,
     longitude: number
 }
