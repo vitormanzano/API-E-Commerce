@@ -11,19 +11,19 @@
 
  ## What the api should do?
  
- [] - Should be able to create a user. </br>
- [] - Should be able to authenticate a user.  </br>
- [] - Should be able to update a user. </br>
- [] - Should be able to delete a user. </br>
- [] - User should be able to create a product. </br>
- [] - User should be able to update a product if he's created by the user. </br>
- [] - User should be able to delete a product if he's created by the user. </br>
- [] - User should be able to sell your product to other user. </br>
- [] - User should be able to search products. </br>
- [] - User should be able to get a list of your products. </br>
- [] - User should be able to get a list of your past sells. </br>
- [] - User shoud be able to get a list of your buys. </br>
- [] - User should be able to get a list of products of their most nearby sellers.
+ [] - Should be able to create a person. </br>
+ [] - Should be able to authenticate a person.  </br>
+ [] - Should be able to update a person. </br>
+ [] - Should be able to delete a person. </br>
+ [] - Person should be able to create a product. </br>
+ [] - Person should be able to update a product if he's created by the person. </br>
+ [] - Person should be able to delete a product if he's created by the person. </br>
+ [] - Person should be able to sell your product to other person. </br>
+ [] - Person should be able to search products. </br>
+ [] - Person should be able to get a list of your products. </br>
+ [] - Person should be able to get a list of your past sells. </br>
+ [] - Person shoud be able to get a list of your buys. </br>
+ [] - Person should be able to get a list of products of their most nearby sellers.
   
  
 ## How to use

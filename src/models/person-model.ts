@@ -1,4 +1,4 @@
-export interface IUserModel {
+export interface IPersonModel {
     guid: string,
     name: string,
     email: string,

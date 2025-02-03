@@ -1,6 +1,6 @@
 import fastify from  'fastify'
-import { userRoutes } from './routes';
+import { personRoutes } from './routes';
 
 export const app = fastify();
 
- app.register(userRoutes);
+ app.register(personRoutes);
