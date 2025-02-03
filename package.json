@@ -7,7 +7,10 @@
     "dist": "tsup src",
     "start:dev": "tsx --env-file=.env src/server.ts",
     "start:watch": "tsx watch --env-file=.env  src/server.ts",
-    "start:dist": "npm run dist && node dist/src/index.js"
+    "start:dist": "npm run dist && node dist/src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +18,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.10.2",
+    "@vitest/ui": "^3.0.4",
     "bcryptjs": "^2.4.3",
     "prisma": "^6.3.0",
     "tsup": "^8.3.5",
