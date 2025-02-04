@@ -18,7 +18,7 @@
  [] - Delete a person. </br>
 
  The person should also be able to:
- [] - Create a product. </br>
+ [x] - Create a product. </br>
  [] - Update a product if it has been created by the person. </br>
  [] - Delete a product if it has been created by the person. </br>
  [] - Sell his product to other person. </br>
