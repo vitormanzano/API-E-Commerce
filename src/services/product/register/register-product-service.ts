@@ -28,6 +28,10 @@ export class RegisterProductService {
             throw new ResourceNotFoundError();  
         }
 
+        if (productData.quantity < 1) {
+            throw new Error('Quantidade precisa ser maior que 0!');
+        }
+
         productData.sellerId = sellerData.guid;
 
         const product = await this.productsRepository.registerProduct(productData);
