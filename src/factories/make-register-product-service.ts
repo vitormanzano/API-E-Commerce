@@ -5,7 +5,7 @@ import { RegisterProductService } from "../services/product/register/register-pr
 export function makeRegisterProductService() {
     const productsRepsitory = new PrismaProductRepository();
     const personsRepository = new PrismaPersonRepository()
-    const registerProduct = new RegisterProductService(productsRepsitory, personsRepository);
+    const registerService = new RegisterProductService(productsRepsitory, personsRepository);
 
-    return registerProduct;
+    return registerService;
 }

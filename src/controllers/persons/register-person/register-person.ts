@@ -29,7 +29,7 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
 
     catch (error) {
        console.log(error);
-       return reply.status(400).send({ message: 'Bad request '}); 
+       return reply.status(400).send(error); 
     }
 
     

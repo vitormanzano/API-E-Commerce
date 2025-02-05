@@ -7,7 +7,7 @@ export class PrismaProductRepository implements IProductRepository {
     async registerProduct(productData: Prisma.ProductUncheckedCreateInput): Promise<Product> {
          const product = await prisma.product.create({
                     data: productData
-                });
+            });
                 
             return product;
     }
