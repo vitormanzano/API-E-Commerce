@@ -2,6 +2,7 @@ import { describe, beforeEach, it, expect } from "vitest";
 import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
 import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
+import { DeletePersonByGuidService } from "./delete-person-service";
 
 let personsRepository: IPersonsRepository;
 let sut: DeletePersonByGuidService;
@@ -22,9 +23,9 @@ describe('Delete person service', () => {
             longitude: -47.0652211 
         }
 
-        await personsRepository.registerPerson(personData);
+        const personResponse = await personsRepository.registerPerson(personData);
 
-        const deletedPerson = await sut.execute(delectedPerson);
+        const deletedPerson = await sut.execute(personResponse.guid);
 
         expect(deletedPerson.guid).toEqual(expect.any(String));
 
