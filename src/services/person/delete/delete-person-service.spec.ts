@@ -3,6 +3,7 @@ import { IPersonsRepository } from "../../../repositories/persons-repository-int
 import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
 import { DeletePersonByGuidService } from "./delete-person-service";
+import { InvalidCredentialsError } from "../../../errors/invalid-credentials-error";
 
 let personsRepository: IPersonsRepository;
 let sut: DeletePersonByGuidService;
@@ -30,4 +31,12 @@ describe('Delete person service', () => {
         expect(deletedPerson.guid).toEqual(expect.any(String));
 
     });
+
+    it('Should not be able to delete a person if none exist', async () => {
+        const dontExistGuid = 'dontExistGuid';
+
+        await expect(() => sut.execute(dontExistGuid)).rejects.toBeInstanceOf(InvalidCredentialsError);
+    });
+
+    
 })

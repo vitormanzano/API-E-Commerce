@@ -6,8 +6,8 @@ export class InMemoryPersonRepository implements IPersonsRepository {
     private personList: Person[] = [];
 
     public async deletePersonByGuid(guid: string): Promise<Person | undefined> {
-        const hasExistPerson = this.findPersonByGuid(guid);
-
+        const hasExistPerson = await this.findPersonByGuid(guid);
+        
         if (!hasExistPerson) {
             return undefined;
         }

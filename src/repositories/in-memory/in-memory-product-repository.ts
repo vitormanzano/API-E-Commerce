@@ -18,6 +18,5 @@ export class InMemoryProductRepository implements IProductRepository {
         this.productList.push(product);
 
         return product
-    }
-    
+    }  
 }
