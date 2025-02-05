@@ -12,7 +12,7 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
         longitude: z.number().min(-180).max(180)
     });
     
-    const registerPersonBody = registerBodySchema.parse(request.body) as IRegisterPersonServiceRequest;
+    const registerPersonBody = registerBodySchema.parse(request.body);
 
     try {
         const registerPersonService = makeRegisterPersonService();

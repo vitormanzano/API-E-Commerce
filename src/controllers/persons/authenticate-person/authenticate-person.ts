@@ -9,7 +9,7 @@ export const authenticatePerson = async (request: FastifyRequest, reply: Fastify
         password: z.string()
     });
 
-    const authenticatePersonBody = authenticateBodySchema.parse(request.body) as IAuthenticatePersonModel;
+    const authenticatePersonBody = authenticateBodySchema.parse(request.body);
 
     try {
         const authenticatePersonService = makeAuthenticatePersonService();
