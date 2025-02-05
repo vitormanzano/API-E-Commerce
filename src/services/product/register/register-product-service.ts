@@ -23,7 +23,7 @@ export class RegisterProductService {
 
     async execute(productData: IRegisterProductServiceRequest): Promise<IRegisterProductServiceResponse> {
         const sellerData = await this.personsRepository.findPersonByEmail(productData.sellerId);
-        
+       
         if (!sellerData) {
             throw new ResourceNotFoundError();  
         }

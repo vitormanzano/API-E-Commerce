@@ -5,12 +5,11 @@ import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-mem
 import { randomUUID } from "crypto";
 import { compare } from "bcryptjs";
 import { PersonAlreadyExistsError } from "../../../errors/person-already-exists-error";
-import { ZodError } from "zod";
 
 let personsRepository: IPersonsRepository;
 let sut: RegisterPersonService;
 
-describe('Register person service', async () => {
+describe('Register person service', () => {
     beforeEach(async () => {
         personsRepository = new InMemoryPersonRepository();
         sut = new RegisterPersonService(personsRepository);
