@@ -4,7 +4,6 @@ import { hash } from "bcryptjs";
 import { PersonAlreadyExistsError } from "../../../errors/person-already-exists-error";
 
 export interface IRegisterPersonServiceRequest {
-    guid: string;
     name: string;
     email: string;
     password: string;
