@@ -86,6 +86,4 @@ describe('Register product service', () => {
 
         expect(() => sut.execute(productData)).rejects.toBeInstanceOf(Error);
     });
-
-    
-})
+});
