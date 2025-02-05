@@ -2,5 +2,5 @@ import { PrismaClient } from "@prisma/client";
 import { env } from "../env/index";
 
 export const prisma = new PrismaClient({
-    log: env.NODE_ENV === 'dev' ? ['query'] : [] //if in mode dev we do a query.
+    log: env.NODE_ENV === 'dev' ? ['query'] : [] //if in mode dev, make a query.
 })

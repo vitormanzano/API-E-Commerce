@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
-import { makeRegisterService } from "../../../factories/make-register-person-service";
+import { makeRegisterPersonService } from "../../../factories/make-register-person-service";
 import { IRegisterPersonServiceRequest} from "../../../services/person/register/register-person-service";
 
 export const registerPerson = async (request: FastifyRequest, reply: FastifyReply) => {
@@ -15,9 +15,9 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
     const registerPersonBody = registerBodySchema.parse(request.body) as IRegisterPersonServiceRequest;
 
     try {
-        const registerPersonService = makeRegisterService();
+        const registerPersonService = makeRegisterPersonService();
 
-        const { person }  = await registerPersonService.execute(registerPersonBody);
+        const { person } = await registerPersonService.execute(registerPersonBody);
 
         return reply.status(201).send({
             person: {
