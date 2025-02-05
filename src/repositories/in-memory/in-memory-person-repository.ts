@@ -5,6 +5,10 @@ import { randomUUID } from "crypto";
 export class InMemoryPersonRepository implements IPersonsRepository {
     private personList: Person[] = [];
 
+    deletePersonByGuid(guid: string): Promise<Person> {
+        throw new Error("Method not implemented.");
+    }
+
     async registerPerson(personData: Prisma.PersonCreateInput) {
         const person = {
             guid: randomUUID(),
@@ -23,7 +27,7 @@ export class InMemoryPersonRepository implements IPersonsRepository {
         const hasExistPerson = this.personList.find(person => person.email === email);
 
         if (!hasExistPerson) {
-            return null;
+            return null
         }
 
         return hasExistPerson;
