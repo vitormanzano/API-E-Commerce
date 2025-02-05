@@ -3,7 +3,7 @@ import { AuthenticatePersonService } from "../services/person/authenticate/authe
 
 export function makeAuthenticatePersonService() {
     const personsRepository = new PrismaPersonRepository();
-    const authenticatePerson = new AuthenticatePersonService(personsRepository);
+    const authenticateService = new AuthenticatePersonService(personsRepository);
 
-    return authenticatePerson;
+    return authenticateService;
 }
