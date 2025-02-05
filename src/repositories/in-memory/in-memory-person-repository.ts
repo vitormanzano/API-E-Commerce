@@ -5,11 +5,24 @@ import { randomUUID } from "crypto";
 export class InMemoryPersonRepository implements IPersonsRepository {
     private personList: Person[] = [];
 
-    deletePersonByGuid(guid: string): Promise<Person> {
-        throw new Error("Method not implemented.");
+    public async deletePersonByGuid(guid: string): Promise<Person | undefined> {
+        const hasExistPerson = this.findPersonByGuid(guid);
+
+        if (!hasExistPerson) {
+            return undefined;
+        }
+
+        const indexOfPerson = this.personList.findIndex(person => person.guid === guid);
+
+        if (indexOfPerson === -1) {
+            return undefined;
+        }
+
+        this.personList.splice(indexOfPerson, 1);
+        return hasExistPerson;
     }
 
-    async registerPerson(personData: Prisma.PersonCreateInput) {
+    public async registerPerson(personData: Prisma.PersonCreateInput) {
         const person = {
             guid: randomUUID(),
             name: personData.name,
@@ -23,12 +36,18 @@ export class InMemoryPersonRepository implements IPersonsRepository {
 
         return person;
     }
-    async findPersonByEmail(email: string) {
+    public async findPersonByEmail(email: string) {
         const hasExistPerson = this.personList.find(person => person.email === email);
 
         if (!hasExistPerson) {
             return null
         }
+
+        return hasExistPerson;
+    }
+
+    public async findPersonByGuid(guid: string) {
+        const hasExistPerson = this.personList.find(person => person.guid === guid);
 
         return hasExistPerson;
     }
