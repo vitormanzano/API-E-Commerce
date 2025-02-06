@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
 import { makeDeletePersonService } from "../../../factories/make-delete-person-service";
+import * as HttpResponse from "../../../utils/http-helper";
+
 
 export const deletePersonByGuid = async (request: FastifyRequest, reply: FastifyReply) => {
     const deleteBodySchema = z.object({
@@ -14,14 +16,17 @@ export const deletePersonByGuid = async (request: FastifyRequest, reply: Fastify
 
         const  { person } = await deletePersonService.execute(deletePersonBody);
 
-        return reply.status(200).send({
+        const httpResponse = await HttpResponse.ok({
             person: {
-                ...person,
-                password: undefined,
+                person,
+                password: undefined
             }
         });
+
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
     catch(error) {
-        return reply.status(400).send(error);
+        const httpResponse = await HttpResponse.notFound(error);
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }
