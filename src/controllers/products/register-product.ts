@@ -13,7 +13,6 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
     });
 
     const registerProductBody = registerBodySchema.parse(request.body);
-    console.log("AQUI");
 
     try {
         const registerProduct = makeRegisterProductService();
