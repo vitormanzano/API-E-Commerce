@@ -3,6 +3,20 @@ import { IPersonsRepository } from "../persons-repository-interface";
 import { prisma } from "../../lib/prisma";
 
 export class PrismaPersonRepository implements IPersonsRepository {
+    async findPersonByGuid(guid: string) {
+        const person = await prisma.person.findUnique({
+            where: {
+                guid
+            }
+        });
+
+        if (!person) {
+            return undefined;
+        }
+
+        return person;
+    }
+
     async deletePersonByGuid(guid: string): Promise<Person> {
         const person = await prisma.person.delete({
             where: {
