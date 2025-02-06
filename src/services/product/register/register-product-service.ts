@@ -4,7 +4,6 @@ import { IPersonsRepository } from "../../../repositories/persons-repository-int
 import { ResourceNotFoundError } from "../../../errors/resource-not-found-error";
 
 export interface IRegisterProductServiceRequest {
-    guid?: string
     name: string
     description: string
     price: number

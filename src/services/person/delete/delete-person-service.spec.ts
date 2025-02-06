@@ -24,18 +24,20 @@ describe('Delete person service', () => {
             longitude: -47.0652211 
         }
 
-        const personResponse = await personsRepository.registerPerson(personData);
+        const  personResponse  = await personsRepository.registerPerson(personData);
 
-        const deletedPerson = await sut.execute(personResponse.guid);
+        const { person } = await sut.execute({
+            guid: personResponse.guid
+        });
 
-        expect(deletedPerson.guid).toEqual(expect.any(String));
+        expect(person.guid).toEqual(expect.any(String));
 
     });
 
     it('Should not be able to delete a person if none exist', async () => {
-        const dontExistGuid = 'dontExistGuid';
+        const guid = 'dontExistGuid';
 
-        await expect(() => sut.execute(dontExistGuid)).rejects.toBeInstanceOf(InvalidCredentialsError);
+        await expect(() => sut.execute( {guid} )).rejects.toBeInstanceOf(InvalidCredentialsError);
     });
 
     

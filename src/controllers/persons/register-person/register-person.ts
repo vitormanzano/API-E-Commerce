@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
 import { makeRegisterPersonService } from "../../../factories/make-register-person-service";
-import { IRegisterPersonServiceRequest} from "../../../services/person/register/register-person-service";
 
 export const registerPerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({
@@ -31,6 +30,4 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
        console.log(error);
        return reply.status(400).send(error); 
     }
-
-    
 } 
