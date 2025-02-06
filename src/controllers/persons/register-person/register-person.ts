@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
 import { makeRegisterPersonService } from "../../../factories/make-register-person-service";
+import * as HttpResponse from "../../../utils/http-helper";
+
 
 export const registerPerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({
@@ -18,16 +20,18 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
 
         const { person } = await registerPersonService.execute(registerPersonBody);
 
-        return reply.status(201).send({
+        const httpResponse = await HttpResponse.created({
             person: {
-                ...person,
+                person,
                 password: undefined
             }
-        });
+        })
+
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 
     catch (error) {
-       console.log(error);
-       return reply.status(400).send(error); 
+        const httpResponse = await HttpResponse.badRequest(error);
+       return reply.status(httpResponse.statusCode).send(httpResponse.body); 
     }
 } 

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as z from "zod";
-import { IRegisterProductServiceRequest } from "../../services/product/register/register-product-service";
 import { makeRegisterProductService } from "../../factories/make-register-product-service";
+import * as HttpResponse from "../../utils/http-helper";
 
 export const registerProduct = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({
@@ -17,11 +17,14 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
     try {
         const registerProduct = makeRegisterProductService();
 
-        await registerProduct.execute(registerProductBody);
+        const product = await registerProduct.execute(registerProductBody);
+
+        const httpResponse = await HttpResponse.created(product);
+        
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
     catch (error) {
-        console.log(error);
+        const httpResponse = await HttpResponse.badRequest(error);
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
-
-    reply.status(201).send(registerProductBody);
 }

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as z from "zod";
-import { IAuthenticatePersonModel } from "../../../models/authenticate-person-model";
 import { makeAuthenticatePersonService } from "../../../factories/make-authenticate-person-service";
+import * as HttpResponse from "../../../utils/http-helper";
 
 export const authenticatePerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const authenticateBodySchema = z.object({
@@ -16,12 +16,13 @@ export const authenticatePerson = async (request: FastifyRequest, reply: Fastify
 
         const personGuid = await authenticatePersonService.execute(authenticatePersonBody);
 
-        return reply.status(200).send(personGuid);
+        const httpResponse = await HttpResponse.ok(personGuid);
 
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 
     catch (error) {
-        console.log(error);
-        return reply.status(400).send({ message: 'Bad request' });
+        const httpResponse = await HttpResponse.noContent(error);
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 } 
