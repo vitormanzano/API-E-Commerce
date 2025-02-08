@@ -23,6 +23,7 @@ export const authenticatePerson = async (request: FastifyRequest, reply: Fastify
 
     catch (error) {
         const httpResponse = await HttpResponse.noContent(error);
+        
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 } 

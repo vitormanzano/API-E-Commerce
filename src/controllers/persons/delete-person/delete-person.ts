@@ -27,6 +27,7 @@ export const deletePersonByGuid = async (request: FastifyRequest, reply: Fastify
     }
     catch(error) {
         const httpResponse = await HttpResponse.notFound(error);
+        
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }
