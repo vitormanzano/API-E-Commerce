@@ -32,6 +32,7 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
 
     catch (error) {
         const httpResponse = await HttpResponse.badRequest(error);
+        
        return reply.status(httpResponse.statusCode).send(httpResponse.body); 
     }
 } 

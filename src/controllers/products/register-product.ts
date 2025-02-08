@@ -25,6 +25,7 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
     }
     catch (error) {
         const httpResponse = await HttpResponse.badRequest(error);
+        
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }
