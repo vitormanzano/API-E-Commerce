@@ -27,7 +27,7 @@ export class AuthenticatePersonService {
             throw new InvalidCredentialsError();
         }
 
-        return person.guid;
+        return person;
 
     }
 

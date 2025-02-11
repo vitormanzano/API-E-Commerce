@@ -24,7 +24,7 @@ export class RegisterPersonService {
         if (hasExistPerson) {
             throw new PersonAlreadyExistsError();
         }
-        
+
         if ( personData.password.length < 6) {
             throw new Error('Password not be able to be fewer than 6 characters');
         }
