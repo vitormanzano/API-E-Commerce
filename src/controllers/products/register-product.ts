@@ -12,7 +12,7 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
         sellerId: z.string()
     });
 
-    const registerProductBody = registerBodySchema.parse(request.body);
+    const registerProductBody = registerBodySchema.parse(request.body); //Make a function to create this schema and body
 
     try {
         const registerProduct = makeRegisterProductService();

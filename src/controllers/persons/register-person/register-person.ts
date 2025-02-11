@@ -26,11 +26,11 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
                 password: undefined
             }
         })
-
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 
     catch (error) {
+
         const httpResponse = await HttpResponse.badRequest(error);
         
        return reply.status(httpResponse.statusCode).send(httpResponse.body); 

@@ -13,9 +13,9 @@
  
  The API should be able to: 
  [x] - Create a person. </br>
- [] - Authenticate a person.  </br>
+ [x] - Authenticate a person.  </br>
  [] - Update a person. </br>
- [] - Delete a person. </br>
+ [x] - Delete a person. </br>
 
  The person should also be able to:
  [x] - Create a product. </br>
