@@ -1,26 +1,17 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import * as z from "zod";
-import { makeAuthenticatePersonService } from "../../../factories/make-authenticate-person-service";
 import * as HttpResponse from "../../../utils/http-helper";
 
-export const authenticatePerson = async (request: FastifyRequest, reply: FastifyReply) => {
-    const authenticateBodySchema = z.object({
-        email: z.string(),
-        password: z.string()
-    });
-
-    const authenticatePersonBody = authenticateBodySchema.parse(request.body);
+export const refresh = async (request: FastifyRequest, reply: FastifyReply) => {
+    await request.jwtVerify({ onlyCookie: true });
 
     try {
-        const authenticatePersonService = makeAuthenticatePersonService();
-
-        const person = await authenticatePersonService.execute(authenticatePersonBody);
+        const person = request.user.sub;
 
         const token = await reply.jwtSign(
             {},
             {
                 sign: {
-                    sub: person.guid
+                    sub: person
                 }
             }
         )
@@ -29,11 +20,11 @@ export const authenticatePerson = async (request: FastifyRequest, reply: Fastify
             {},
             {
                 sign: {
-                    sub: person.guid,
+                    sub: person,
                     expiresIn: '7d'
                 }
             }
-        );
+        )
 
         const httpResponse = await HttpResponse.ok(token);
 
