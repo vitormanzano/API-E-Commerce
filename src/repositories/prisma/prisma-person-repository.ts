@@ -1,4 +1,4 @@
-import { Person, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { IPersonsRepository } from "../persons-repository-interface";
 import { prisma } from "../../lib/prisma";
 
@@ -10,14 +10,10 @@ export class PrismaPersonRepository implements IPersonsRepository {
             }
         });
 
-        if (!person) {
-            return undefined;
-        }
-
         return person;
     }
 
-    async deletePersonByGuid(guid: string): Promise<Person> {
+    async deletePersonByGuid(guid: string) {
         const person = await prisma.person.delete({
             where: {
                 guid
@@ -33,10 +29,6 @@ export class PrismaPersonRepository implements IPersonsRepository {
                 email
             }
         });
-
-        if(!person) {
-            throw new Error();
-        }
 
         return person
 
