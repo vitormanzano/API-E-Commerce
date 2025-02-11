@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as z from "zod";
-import { makeAuthenticatePersonService } from "../../../factories/make-authenticate-person-service";
-import * as HttpResponse from "../../../utils/http-helper";
+import { makeAuthenticatePersonService } from "@/factories/make-authenticate-person-service";
+import * as HttpResponse from "@/utils/http-helper";
 
 export const authenticatePerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const authenticateBodySchema = z.object({

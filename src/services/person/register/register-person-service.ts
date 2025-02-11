@@ -1,7 +1,7 @@
 import { Person } from "@prisma/client";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { hash } from "bcryptjs";
-import { PersonAlreadyExistsError } from "../../../errors/person-already-exists-error";
+import { PersonAlreadyExistsError } from "@/errors/person-already-exists-error";
 
 export interface IRegisterPersonServiceRequest {
     name: string;

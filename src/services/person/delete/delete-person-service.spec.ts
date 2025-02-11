@@ -1,9 +1,9 @@
 import { describe, beforeEach, it, expect } from "vitest";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
-import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-memory-person-repository";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
+import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
 import { DeletePersonByGuidService } from "./delete-person-service";
-import { InvalidCredentialsError } from "../../../errors/invalid-credentials-error";
+import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 
 let personsRepository: IPersonsRepository;
 let sut: DeletePersonByGuidService;

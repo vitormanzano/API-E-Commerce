@@ -1,5 +1,5 @@
-import { PersonAlreadyExistsError } from "../errors/person-already-exists-error";
-import { HttpResponseModel } from "../models/http-response-model";
+import { PersonAlreadyExistsError } from "@/errors/person-already-exists-error";
+import { HttpResponseModel } from "@/models/http-response-model";
 
 export const ok = async (body: any): Promise<HttpResponseModel> => {
     return {

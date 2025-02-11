@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
-import { makeDeletePersonService } from "../../../factories/make-delete-person-service";
-import * as HttpResponse from "../../../utils/http-helper";
+import { makeDeletePersonService } from "@/factories/make-delete-person-service";
+import * as HttpResponse from "@/utils/http-helper";
 
 
 export const deletePersonByGuid = async (request: FastifyRequest, reply: FastifyReply) => {

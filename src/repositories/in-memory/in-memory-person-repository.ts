@@ -49,6 +49,10 @@ export class InMemoryPersonRepository implements IPersonsRepository {
     public async findPersonByGuid(guid: string) {
         const hasExistPerson = this.personList.find(person => person.guid === guid);
 
+        if (!hasExistPerson) {
+            return null;
+        }
+
         return hasExistPerson;
     }
     

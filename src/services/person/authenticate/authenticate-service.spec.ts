@@ -1,10 +1,10 @@
 import { describe, expect, it, beforeEach } from "vitest";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { AuthenticatePersonService } from "./authenticate-service";
-import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-memory-person-repository";
+import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
 import { hash } from "bcryptjs";
-import { InvalidCredentialsError } from "../../../errors/invalid-credentials-error";
+import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 
 let personsRepository: IPersonsRepository;
 let sut: AuthenticatePersonService;
