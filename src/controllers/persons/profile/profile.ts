@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeGetPersonProfileService } from "../../../factories/make-get-person-profile-service";
+import { makeGetPersonProfileService } from "@/factories/make-get-person-profile-service";
 
 export const profile = async (request: FastifyRequest, reply: FastifyReply) => {
    const getPersonProfile = makeGetPersonProfileService();

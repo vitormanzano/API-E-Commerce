@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import * as HttpResponse from "../../../utils/http-helper";
+import * as HttpResponse from "@/utils/http-helper";
 
 export const refresh = async (request: FastifyRequest, reply: FastifyReply) => {
     await request.jwtVerify({ onlyCookie: true });

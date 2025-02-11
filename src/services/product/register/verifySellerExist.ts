@@ -1,5 +1,5 @@
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
-import { ResourceNotFoundError } from "../../../errors/resource-not-found-error";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
+import { ResourceNotFoundError } from "@/errors/resource-not-found-error";
 import { IRegisterProductServiceRequest } from "./register-product-service";
 
 export const verifySellerExist = async (personsRepository: IPersonsRepository, productData: IRegisterProductServiceRequest ) => 

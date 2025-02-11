@@ -1,6 +1,6 @@
 import { Prisma, Product } from "@prisma/client";
 import { IProductRepository } from "../products-repository-interface";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 
 export class PrismaProductRepository implements IProductRepository {

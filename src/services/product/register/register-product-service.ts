@@ -1,7 +1,6 @@
 import { Product, } from "@prisma/client";
-import { IProductRepository } from "../../../repositories/products-repository-interface";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
-import { ResourceNotFoundError } from "../../../errors/resource-not-found-error";
+import { IProductRepository } from "@/repositories/products-repository-interface";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { verifySellerExist } from "./verifySellerExist";
 import { verifyProductIsValid } from "./verifyProductIsValid";
 

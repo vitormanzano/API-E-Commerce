@@ -1,4 +1,4 @@
-import { InvalidCredentialsError } from "../../../errors/invalid-credentials-error";
+import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 
 export class GetProfileService {

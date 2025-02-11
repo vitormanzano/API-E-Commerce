@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as z from "zod";
-import { makeRegisterProductService } from "../../factories/make-register-product-service";
-import * as HttpResponse from "../../utils/http-helper";
+import { makeRegisterProductService } from "@/factories/make-register-product-service";
+import * as HttpResponse from "@/utils/http-helper";
 
 export const registerProduct = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({

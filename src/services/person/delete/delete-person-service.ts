@@ -1,6 +1,6 @@
 import { Person } from "@prisma/client";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
-import { InvalidCredentialsError } from "../../../errors/invalid-credentials-error";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
+import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 
 interface IDeletePersonByGuidRequest {
     guid: string

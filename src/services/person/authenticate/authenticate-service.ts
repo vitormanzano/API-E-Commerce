@@ -1,6 +1,6 @@
 import { compare } from "bcryptjs";
-import { InvalidCredentialsError } from "../../../errors/invalid-credentials-error";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
+import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 
 interface IAuthenticatePersonRequest {
     email: string;

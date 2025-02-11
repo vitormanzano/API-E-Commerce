@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { IPersonsRepository } from "../persons-repository-interface";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export class PrismaPersonRepository implements IPersonsRepository {
     async findPersonByGuid(guid: string) {

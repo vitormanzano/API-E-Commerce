@@ -1,10 +1,10 @@
 import { describe, it, beforeEach, expect } from "vitest";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { RegisterPersonService } from "./register-person-service";
-import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-memory-person-repository";
+import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
 import { compare } from "bcryptjs";
-import { PersonAlreadyExistsError } from "../../../errors/person-already-exists-error";
+import { PersonAlreadyExistsError } from "@/errors/person-already-exists-error";
 
 let personsRepository: IPersonsRepository;
 let sut: RegisterPersonService;

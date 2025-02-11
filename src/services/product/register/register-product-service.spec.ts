@@ -1,11 +1,11 @@
 import { describe, it, beforeEach, expect } from "vitest";
-import { IPersonsRepository } from "../../../repositories/persons-repository-interface";
-import { IProductRepository } from "../../../repositories/products-repository-interface";
+import { IPersonsRepository } from "@/repositories/persons-repository-interface";
+import { IProductRepository } from "@/repositories/products-repository-interface";
 import { RegisterProductService } from "./register-product-service";
-import { InMemoryProductRepository } from "../../../repositories/in-memory/in-memory-product-repository";
-import { InMemoryPersonRepository } from "../../../repositories/in-memory/in-memory-person-repository";
+import { InMemoryProductRepository } from "@/repositories/in-memory/in-memory-product-repository";
+import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
-import { ResourceNotFoundError } from "../../../errors/resource-not-found-error";
+import { ResourceNotFoundError } from "@/errors/resource-not-found-error";
 
 let productsRepository: IProductRepository;
 let personsRepository: IPersonsRepository;
