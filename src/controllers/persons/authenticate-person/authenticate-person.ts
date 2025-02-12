@@ -14,7 +14,7 @@ export const authenticatePerson = async (request: FastifyRequest, reply: Fastify
     try {
         const authenticatePersonService = makeAuthenticatePersonService();
 
-        const person = await authenticatePersonService.execute(authenticatePersonBody);
+        const { person } = await authenticatePersonService.execute(authenticatePersonBody);
 
         const token = await reply.jwtSign(
             {},
