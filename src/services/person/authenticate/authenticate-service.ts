@@ -1,6 +1,7 @@
 import { compare } from "bcryptjs";
 import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
+import { Person } from "@prisma/client";
 
 interface IAuthenticatePersonRequest {
     email: string;
@@ -8,13 +9,13 @@ interface IAuthenticatePersonRequest {
 }
 
 interface IAuthenticatePersonResponse {
-    guid: string;
+    person: Person
 }
 
 export class AuthenticatePersonService {
     constructor(private personsRepository: IPersonsRepository) {}
 
-    async execute(authenticatePersonData: IAuthenticatePersonRequest) {
+    async execute(authenticatePersonData: IAuthenticatePersonRequest): Promise<IAuthenticatePersonResponse> {
         const person = await this.personsRepository.findPersonByEmail(authenticatePersonData.email);
 
         if (!person) {
@@ -27,7 +28,7 @@ export class AuthenticatePersonService {
             throw new InvalidCredentialsError();
         }
 
-        return person;
+        return { person };
 
     }
 
