@@ -1,10 +1,22 @@
 import { Prisma, Person } from "@prisma/client";
 import { IPersonsRepository } from "../persons-repository-interface";
 import { randomUUID } from "crypto";
+import { Decimal } from "@prisma/client/runtime/library";
 
 export class InMemoryPersonRepository implements IPersonsRepository {
     private personList: Person[] = [];
 
+    async updatePersonByGuid(guid: string, person: Prisma.PersonUncheckedCreateInput): Promise<Person | null> {
+        const personData = await this.findPersonByGuid(guid);
+
+        personData!.email = person.email;
+        personData!.name = person.name;
+        personData!.latitude = person.latitude as Decimal;
+        personData!.longitude = person.longitude as Decimal;
+
+        return personData;
+    }
+    
     public async deletePersonByGuid(guid: string): Promise<Person | undefined> {
         const hasExistPerson = await this.findPersonByGuid(guid);
 
