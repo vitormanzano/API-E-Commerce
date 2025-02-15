@@ -5,5 +5,5 @@ export interface IPersonsRepository {
     findPersonByEmail(email: string): Promise<Person | null>
     deletePersonByGuid(guid: string): Promise<Person | undefined>
     findPersonByGuid(guid: string): Promise<Person | null>
-    updatePersonByGuid(guid: string, person: Prisma.PersonUncheckedCreateInput): Promise<Person | null> 
+    updatePersonByGuid(guid: string, person: Prisma.PersonUpdateInput): Promise<Person | null> 
 }
