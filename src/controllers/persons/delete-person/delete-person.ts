@@ -5,16 +5,12 @@ import * as HttpResponse from "@/utils/http-helper";
 
 
 export const deletePersonByGuid = async (request: FastifyRequest, reply: FastifyReply) => {
-    const deleteBodySchema = z.object({
-        guid: z.string()
-    });
-
-    const deletePersonBody = deleteBodySchema.parse(request.params);
-
+    
     try {
         const deletePersonService = makeDeletePersonService();
 
-        const  { person } = await deletePersonService.execute(deletePersonBody);
+        const guid = request.user.sub;
+        const { person } = await deletePersonService.execute({guid});
 
         const httpResponse = await HttpResponse.ok({
             person: {
