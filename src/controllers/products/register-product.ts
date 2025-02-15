@@ -13,7 +13,7 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
     });
 
     const registerProductBody = registerBodySchema.parse(request.body); //Make a function to create this schema and body
-
+    
     try {
         const registerProduct = makeRegisterProductService();
 

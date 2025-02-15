@@ -15,6 +15,7 @@ export const deletePersonByGuid = async (request: FastifyRequest, reply: Fastify
         const httpResponse = await HttpResponse.ok({
             person: {
                 ...person,
+                guid: undefined,
                 password: undefined
             }
         });

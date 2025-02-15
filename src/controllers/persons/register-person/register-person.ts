@@ -23,6 +23,7 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
         const httpResponse = await HttpResponse.created({
             person: {
                 ...person,
+                guid: undefined,
                 password: undefined
             }
         })
