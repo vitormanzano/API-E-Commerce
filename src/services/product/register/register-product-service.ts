@@ -1,7 +1,5 @@
 import { Product, } from "@prisma/client";
-import { IProductRepository } from "@/repositories/products-repository-interface";
-import { IPersonsRepository } from "@/repositories/persons-repository-interface";
-import { verifySellerExist } from "./verifySellerExist";
+import { IProductsRepository } from "@/repositories/products-repository-interface";
 import { verifyProductIsValid } from "./verifyProductIsValid";
 
 export interface IRegisterProductServiceRequest {
@@ -17,15 +15,11 @@ interface IRegisterProductServiceResponse {
 }
 
 export class RegisterProductService {
-    constructor (private productsRepository: IProductRepository,
-                private personsRepository: IPersonsRepository ) {}
+    constructor (private productsRepository: IProductsRepository) {}
 
     async execute(productData: IRegisterProductServiceRequest): Promise<IRegisterProductServiceResponse> {
-        const sellerExist = await verifySellerExist(this.personsRepository, productData); 
 
-        verifyProductIsValid(productData);
-
-        productData.sellerId = sellerExist.guid;
+        await verifyProductIsValid(productData);
 
         const product = await this.productsRepository.registerProduct(productData);
 

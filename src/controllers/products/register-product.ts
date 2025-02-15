@@ -9,7 +9,7 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
         description: z.string(),
         price: z.number(),
         quantity: z.number(),
-        sellerId: z.string()
+        sellerId: z.string().default(request.user.sub)
     });
 
     const registerProductBody = registerBodySchema.parse(request.body); //Make a function to create this schema and body
@@ -17,9 +17,13 @@ export const registerProduct = async (request: FastifyRequest, reply: FastifyRep
     try {
         const registerProduct = makeRegisterProductService();
 
-        const product = await registerProduct.execute(registerProductBody);
+        const { product } = await registerProduct.execute(registerProductBody);
 
-        const httpResponse = await HttpResponse.created(product);
+        const httpResponse = await HttpResponse.created({
+                ...product,
+                sellerId: undefined,
+                guid: undefined,
+        });
         
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }

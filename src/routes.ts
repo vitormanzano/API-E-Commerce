@@ -17,5 +17,5 @@ export async function personRoutes(app: FastifyInstance) {
 }
 
 export async function productRoutes(app: FastifyInstance) {
-    app.post('/product/register', registerProduct);    
+    app.post('/product/register', {onRequest: verifyJWT} ,registerProduct);    
 }
