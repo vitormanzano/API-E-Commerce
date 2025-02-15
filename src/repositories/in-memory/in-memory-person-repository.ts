@@ -7,7 +7,7 @@ export class InMemoryPersonRepository implements IPersonsRepository {
 
     public async deletePersonByGuid(guid: string): Promise<Person | undefined> {
         const hasExistPerson = await this.findPersonByGuid(guid);
-        
+
         if (!hasExistPerson) {
             return undefined;
         }
@@ -49,7 +49,7 @@ export class InMemoryPersonRepository implements IPersonsRepository {
     public async findPersonByGuid(guid: string) {
         const hasExistPerson = this.personList.find(person => person.guid === guid);
 
-        if (!hasExistPerson) {
+       if (!hasExistPerson) {
             return null;
         }
 
