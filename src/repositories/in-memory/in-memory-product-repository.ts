@@ -1,8 +1,8 @@
 import { Prisma, Product } from "@prisma/client";
-import { IProductRepository } from "../products-repository-interface";
+import { IProductsRepository } from "../products-repository-interface";
 import { randomUUID } from "crypto";
 
-export class InMemoryProductRepository implements IProductRepository {
+export class InMemoryProductRepository implements IProductsRepository {
     private productList: Product[] = [];
 
     async registerProduct(productData: Prisma.ProductUncheckedCreateInput): Promise<Product> {
