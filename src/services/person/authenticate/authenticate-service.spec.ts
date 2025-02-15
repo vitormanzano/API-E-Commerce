@@ -33,9 +33,9 @@ describe('Authenticate person service', () => {
             password: '123456',
         }
 
-        const authenticateGuidPerson = await sut.execute(authenticateData);
+        const { person } = await sut.execute(authenticateData);
 
-        expect(authenticateGuidPerson).toEqual(expect.any(String));
+        expect(person.guid).toEqual(expect.any(String));
     });
 
     it('SHould not be able to authenticate with wrong email', async  () => {
