@@ -7,10 +7,6 @@ export class GetProfileService {
     async execute(guid: string) {
         const person = await this.personsRepository.findPersonByGuid(guid);
 
-        if (!person) {
-            throw new InvalidCredentialsError();
-        }
-
         return { person };
     }
 }
