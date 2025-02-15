@@ -6,6 +6,7 @@ import { randomUUID } from "crypto";
 import { hash } from "bcryptjs";
 import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 
+
 let personsRepository: IPersonsRepository;
 let sut: AuthenticatePersonService;
 
