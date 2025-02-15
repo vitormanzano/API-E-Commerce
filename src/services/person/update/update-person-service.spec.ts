@@ -3,6 +3,7 @@ import { IPersonsRepository } from "@/repositories/persons-repository-interface"
 import { hash } from "bcryptjs";
 import { randomUUID } from "crypto";
 import { beforeEach, describe, expect, it } from "vitest";
+import { UpdatePersonService } from "./update-person-service";
 
 let personsRepository: IPersonsRepository;
 let sut: UpdatePersonService;

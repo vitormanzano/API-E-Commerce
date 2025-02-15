@@ -41,7 +41,7 @@ export class PrismaPersonRepository implements IPersonsRepository {
         return person;
     }
 
-    async updatePersonByGuid(guid: string, personData: Prisma.PersonUncheckedCreateInput): Promise<Person | null> {
+    async updatePersonByGuid(guid: string, personData: Prisma.PersonUpdateInput): Promise<Person | null> {
         const person = await prisma.person.update({
             where: {
                 guid
