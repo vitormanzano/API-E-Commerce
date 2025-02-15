@@ -49,3 +49,10 @@ export const conflict =  async (body: PersonAlreadyExistsError): Promise<HttpRes
         body
     }
 }
+
+export const Unauthorized = async (): Promise<HttpResponseModel> => {
+    return {
+        statusCode: 401,
+        body: undefined
+    }
+}

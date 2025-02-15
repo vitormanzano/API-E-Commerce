@@ -10,7 +10,7 @@ import { verifyJWT } from "./controllers/middlewares/verify-jwt";
 export async function personRoutes(app: FastifyInstance) {
     app.post('/person/register', registerPerson);
     app.post('/sessions', authenticatePerson);
-    app.delete('/person/delete/:guid', deletePersonByGuid);
+    app.delete('/person/delete', {onRequest: verifyJWT}, deletePersonByGuid);
     app.patch('/token/refresh', refresh);
 
     app.get('/me', {onRequest: verifyJWT}, profile)

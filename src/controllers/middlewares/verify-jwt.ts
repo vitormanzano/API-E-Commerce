@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import * as HttpResponse from "@/utils/http-helper";
 
 export async function verifyJWT(request: FastifyRequest, reply: FastifyReply) {
     try {
@@ -6,6 +7,7 @@ export async function verifyJWT(request: FastifyRequest, reply: FastifyReply) {
     }
 
     catch (error) {
-        return reply.status(401).send({ message: "Unauthorized!"} )
+        const httpResponse = await HttpResponse.Unauthorized();
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }
