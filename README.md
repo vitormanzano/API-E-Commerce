@@ -14,12 +14,12 @@
  The API should be able to: 
  [x] - Create a person. </br>
  [x] - Authenticate a person.  </br>
- [] - Update a person. </br>
+ [x] - Update a person. </br>
  [x] - Delete a person. </br>
 
  The person should also be able to:
  [x] - Create a product. </br>
- [] - Update a product if it has been created by the person. </br>
+ [x] - Update a product if it has been created by the person. </br>
  [] - Delete a product if it has been created by the person. </br>
  [] - Sell his product to other person. </br>
  [] - Search products. </br>
