@@ -13,7 +13,7 @@ export class PrismaProductRepository implements IProductsRepository {
         return product;
     }
 
-    async findProductsByPerson(guid: string, page: number): Promise<Product[] | null> {
+    async findProductsByPerson(guid: string, page: number): Promise<Product[]> {
         const products = prisma.product.findMany({
             where: {
                 sellerId: {

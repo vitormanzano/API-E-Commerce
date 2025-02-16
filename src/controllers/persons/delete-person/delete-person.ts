@@ -1,16 +1,13 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import * as z from "zod";
 import { makeDeletePersonService } from "@/factories/make-delete-person-service";
 import * as HttpResponse from "@/utils/http-helper";
 
-
 export const deletePersonByGuid = async (request: FastifyRequest, reply: FastifyReply) => {
-    
     try {
         const deletePersonService = makeDeletePersonService();
 
         const guid = request.user.sub;
-        const { person } = await deletePersonService.execute({guid});
+        const { person } = await deletePersonService.execute({ guid });
 
         const httpResponse = await HttpResponse.ok({
             person: {

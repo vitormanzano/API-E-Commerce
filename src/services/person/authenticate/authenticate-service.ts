@@ -1,16 +1,8 @@
 import { compare } from "bcryptjs";
 import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
-import { Person } from "@prisma/client";
-
-interface IAuthenticatePersonServiceRequest {
-    email: string;
-    password: string
-}
-
-interface IAuthenticatePersonServiceResponse {
-    person: Person
-}
+import { IAuthenticatePersonServiceRequest } from "./models/IAuthenticatePersonServiceRequest";
+import { IAuthenticatePersonServiceResponse } from "./models/IAuthenticatePersonServiceResponse";
 
 export class AuthenticatePersonService {
     constructor(private personsRepository: IPersonsRepository) {}

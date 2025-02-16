@@ -4,8 +4,7 @@ import { RegisterProductService } from "@/services/product/register/register-pro
 
 export function makeRegisterProductService() {
     const productsRepsitory = new PrismaProductRepository();
-    const personsRepository = new PrismaPersonRepository()
-    const registerService = new RegisterProductService(productsRepsitory, personsRepository);
+    const registerService = new RegisterProductService(productsRepsitory);
 
     return registerService;
 }
