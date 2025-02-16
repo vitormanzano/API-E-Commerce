@@ -5,7 +5,6 @@ import { RegisterProductService } from "./register-product-service";
 import { InMemoryProductRepository } from "@/repositories/in-memory/in-memory-product-repository";
 import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
-import { ResourceNotFoundError } from "@/errors/resource-not-found-error";
 
 let productsRepository: IProductsRepository;
 let personsRepository: IPersonsRepository;
@@ -27,16 +26,15 @@ describe('Register product service', () => {
             latitude: -22.9482175,
             longitude: -47.0652211 
         }
+        const person  = await personsRepository.registerPerson(personData);
 
         const productData = {
             name: "Vitor",
             description: "Something",
             price: 8.99,
             quantity: 2,
-            sellerId: "johndoe@gmail.com"
+            sellerId: person.guid
         }
-
-        await personsRepository.registerPerson(personData);
         
         const { product } = await sut.execute(productData);
 

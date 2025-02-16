@@ -19,4 +19,27 @@ export class InMemoryProductRepository implements IProductsRepository {
 
         return product
     }  
+
+    async findProductByGuid(guid: string): Promise<Product | null> {
+        const product = this.productList.find(product => product.guid === guid);
+
+        if (!product) {
+            return null;
+        }
+
+        return product;
+    }
+
+    async updateProductByGuid(guid: string, productData: Prisma.ProductUncheckedCreateInput): Promise<Product | null> {
+        const product = await this.findProductByGuid(guid);
+
+        product!.name = productData.name;
+        product!.description = productData.description;
+        product!.price = productData.price;
+        product!.quantity = productData.quantity;
+
+        return product;
+    }
+
+
 }
