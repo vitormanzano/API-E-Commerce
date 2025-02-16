@@ -13,8 +13,8 @@ interface IDeletePersonByGuidServiceResponse {
 export class DeletePersonByGuidService {
     constructor(private personsRepository: IPersonsRepository) {}
 
-    async execute({guid}: IDeletePersonByGuidServiceRequest): Promise<IDeletePersonByGuidServiceResponse> {
-        const person = await this.personsRepository.deletePersonByGuid(guid);
+    async execute(user: IDeletePersonByGuidServiceRequest): Promise<IDeletePersonByGuidServiceResponse> {
+        const person = await this.personsRepository.deletePersonByGuid(user.guid);
 
         if (!person) {
             throw new InvalidCredentialsError(); 

@@ -19,7 +19,7 @@ export class UpdatePersonService {
 
     async execute(guid: string, person: IUpdatePersonServiceRequest): Promise<IUpdatePersonServiceResponse> {
         const updatedPerson = await this.personsRepository.updatePersonByGuid(guid, person)
-
+        
         if (!updatedPerson) {
             throw new InvalidCredentialsError()
         }
