@@ -13,6 +13,20 @@ export class PrismaProductRepository implements IProductsRepository {
         return product;
     }
 
+    async findProductsByPerson(guid: string, page: number): Promise<Product[] | null> {
+        const products = prisma.product.findMany({
+            where: {
+                sellerId: {
+                    contains: guid
+                } 
+            },
+            take: 20,
+            skip: (page - 1) * 20
+        });
+
+        return products;
+    }
+
     async updateProductByGuid(guid: string, productData: Prisma.ProductUpdateInput): Promise<Product | null> {
         const product = await prisma.product.update({
             where: {

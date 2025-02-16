@@ -8,6 +8,7 @@ import { profile } from "./controllers/persons/profile/profile";
 import { verifyJWT } from "./controllers/middlewares/verify-jwt";
 import { updatePerson } from "./controllers/persons/update-person/update-person";
 import { updateProduct } from "./controllers/products/update-product";
+import { getOwnProducts } from "./controllers/products/get-own-products";
 
 export async function personRoutes(app: FastifyInstance) {
     app.post('/person/register', registerPerson);
@@ -24,4 +25,5 @@ export async function personRoutes(app: FastifyInstance) {
 export async function productRoutes(app: FastifyInstance) {
     app.post('/product/register', {onRequest: verifyJWT} ,registerProduct);   
     app.patch('/product/update', {onRequest: verifyJWT}, updateProduct); 
+    app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts)
 }

@@ -25,9 +25,9 @@ describe('Register product service', () => {
             longitude: -47.0652211 
         } 
 
-        const personCreated  = await personsRepository.registerPerson(personData);
+        const { guid } = await personsRepository.registerPerson(personData);
 
-        const { person } = await sut.execute(personCreated.guid);
+        const { person } = await sut.execute({guid});
 
         expect(person!.guid).toEqual(expect.any(String));
     });

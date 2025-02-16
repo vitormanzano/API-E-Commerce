@@ -12,7 +12,8 @@ export class InMemoryProductRepository implements IProductsRepository {
             createdAt: productData.createdAt,
             description: productData.description,
             price: productData.price,
-            quantity: productData.quantity
+            quantity: productData.quantity,
+            sellerId: productData.sellerId
         } as Product
         
         this.productList.push(product);
@@ -42,4 +43,13 @@ export class InMemoryProductRepository implements IProductsRepository {
     }
 
 
+    async findProductsByPerson(guid: string, page: number) {
+        this.productList.forEach(product => {
+            console.log(product.sellerId);
+        });
+        const products = this.productList.filter(product => product.sellerId === guid)
+        .slice((page - 1 ) * 20, page * 20);
+        
+        return products;
+    }
 }

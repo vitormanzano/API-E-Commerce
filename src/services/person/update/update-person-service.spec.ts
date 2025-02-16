@@ -34,8 +34,8 @@ describe('Should be able to update a person', () => {
             longitude: -47.0652211 
         }
 
-        const personUpdated = await sut.execute(createdPerson.guid, personDataForUpdate);
+        const { updatedPerson } = await sut.execute(createdPerson.guid, personDataForUpdate);
 
-        expect(personDataForUpdate.name).toEqual("Doe john");
+        expect(updatedPerson.name).toEqual(personDataForUpdate.name);
     });
 })
