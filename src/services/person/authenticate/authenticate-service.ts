@@ -3,19 +3,19 @@ import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { Person } from "@prisma/client";
 
-interface IAuthenticatePersonRequest {
+interface IAuthenticatePersonServiceRequest {
     email: string;
     password: string
 }
 
-interface IAuthenticatePersonResponse {
+interface IAuthenticatePersonServiceResponse {
     person: Person
 }
 
 export class AuthenticatePersonService {
     constructor(private personsRepository: IPersonsRepository) {}
 
-    async execute(authenticatePersonData: IAuthenticatePersonRequest): Promise<IAuthenticatePersonResponse> {
+    async execute(authenticatePersonData: IAuthenticatePersonServiceRequest): Promise<IAuthenticatePersonServiceResponse> {
         const person = await this.personsRepository.findPersonByEmail(authenticatePersonData.email);
 
         if (!person) {
