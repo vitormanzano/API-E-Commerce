@@ -1,18 +1,7 @@
-import { Product, } from "@prisma/client";
 import { IProductsRepository } from "@/repositories/products-repository-interface";
 import { verifyProductIsValid } from "./verifyProductIsValid";
-
-export interface IRegisterProductServiceRequest {
-    name: string
-    description: string
-    price: number
-    quantity: number
-    sellerId: string
-}
-
-interface IRegisterProductServiceResponse {
-    product: Product; 
-}
+import { IRegisterProductServiceRequest } from "./models/IRegisterProductServiceRequest";
+import { IRegisterProductServiceResponse } from "./models/IRegisterProductServiceResponse";
 
 export class RegisterProductService {
     constructor (private productsRepository: IProductsRepository) {}
