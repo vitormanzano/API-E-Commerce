@@ -1,19 +1,8 @@
-import { Person } from "@prisma/client";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { hash } from "bcryptjs";
 import { PersonAlreadyExistsError } from "@/errors/person-already-exists-error";
-
-export interface IRegisterPersonServiceRequest {
-    name: string;
-    email: string;
-    password: string;
-    latitude: number;
-    longitude: number;
-}
-
-interface IRegisterPersonServiceResponse {
-    person: Person; 
-}
+import { IRegisterPersonServiceRequest } from "./models/IRegisterPersonServiceRequest";
+import { IRegisterPersonServiceResponse } from "./models/IRegisterPersonServiceResponse";
 
 export class RegisterPersonService {
     constructor(private personsRepository: IPersonsRepository) {}

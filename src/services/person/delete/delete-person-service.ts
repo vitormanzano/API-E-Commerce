@@ -1,14 +1,7 @@
-import { Person } from "@prisma/client";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
-
-interface IDeletePersonByGuidServiceRequest {
-    guid: string
-}
-
-interface IDeletePersonByGuidServiceResponse {
-    person: Person;
-}
+import { IDeletePersonByGuidServiceRequest } from "./models/IDeletePersonServiceRequest";
+import { IDeletePersonByGuidServiceResponse } from "./models/IDeletePersonServiceResponse";
 
 export class DeletePersonByGuidService {
     constructor(private personsRepository: IPersonsRepository) {}
