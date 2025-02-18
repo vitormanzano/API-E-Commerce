@@ -12,7 +12,7 @@ export const getOwnProducts = async (request: FastifyRequest, reply: FastifyRepl
 
     try {
         const personGuid = request.user.sub;
-        const getOwnProductsService = await makeGetOwnProductsService();
+        const getOwnProductsService = makeGetOwnProductsService();
 
         const products = await getOwnProductsService.execute({
             personGuid,
