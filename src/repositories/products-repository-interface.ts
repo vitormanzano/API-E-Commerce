@@ -5,4 +5,5 @@ export interface IProductsRepository {
     updateProductByGuid(guid: string, productData:Prisma.ProductUpdateInput): Promise<Product | null>
     findProductByGuid(guid: string): Promise<Product | null>
     findProductsByPerson(guid: string, page: number): Promise<Product[]>
+    findAllProducts(): Promise<Product[]>
 }

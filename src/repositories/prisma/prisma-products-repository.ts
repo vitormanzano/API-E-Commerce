@@ -3,6 +3,12 @@ import { IProductsRepository } from "../products-repository-interface";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaProductRepository implements IProductsRepository {
+    async findAllProducts(): Promise<Product[]> {
+        const products = await prisma.product.findMany({})
+
+        return products;
+    }
+
     async findProductByGuid(guid: string): Promise<Product | null> {
         const product = await prisma.product.findUnique({
             where: {
