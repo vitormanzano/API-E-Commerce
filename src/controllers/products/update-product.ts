@@ -16,7 +16,7 @@ export const updateProduct = async (request: FastifyRequest, reply: FastifyReply
     const updateProductBody = updateBodySchema.parse(request.body);
 
     try {
-        const updateProductService = await makeUpdateProductService();
+        const updateProductService = makeUpdateProductService();
 
         const product  = await updateProductService.execute(updateProductBody.productGuid, updateProductBody);
 
