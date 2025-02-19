@@ -10,6 +10,7 @@ import { updatePerson } from "./controllers/persons/update-person/update-person"
 import { updateProduct } from "./controllers/products/update-product";
 import { getOwnProducts } from "./controllers/products/get-own-products";
 import { findAllProducts } from "./controllers/products/find-all-products";
+import { findProductsByName } from "./controllers/products/find-products-by-name";
 
 export async function personRoutes(app: FastifyInstance) {
     app.post('/person/register', registerPerson);
@@ -29,4 +30,6 @@ export async function productRoutes(app: FastifyInstance) {
     app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts);
 
     app.get('/product/search', findAllProducts);
+
+    app.get('/product/searchName/:name', findProductsByName);
 }
