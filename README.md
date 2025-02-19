@@ -22,8 +22,8 @@
  [x] - Update a product if it has been created by the person. </br>
  [] - Delete a product if it has been created by the person. </br>
  [] - Sell his product to other person. </br>
- [] - Search products. </br>
- [] - Get a list of her products. </br>
+ [x] - Search products. </br>
+ [x] - Get a list of her products. </br>
  [] - Get a list of your his former sales. </br>
  [] - Get a list of your buys. </br>
  [] - Get a list of products from their closest salespeople.

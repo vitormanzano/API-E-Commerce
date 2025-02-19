@@ -6,4 +6,5 @@ export interface IProductsRepository {
     findProductByGuid(guid: string): Promise<Product | null>
     findProductsByPerson(guid: string, page: number): Promise<Product[]>
     findAllProducts(): Promise<Product[]>
+    findProductByName(name: string): Promise<Product[]>
 }
