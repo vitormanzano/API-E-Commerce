@@ -37,7 +37,7 @@ describe('Get own products', () => {
             sellerId: person.guid
         }
         
-        const product = await productsRepository.registerProduct(productData);
+        await productsRepository.registerProduct(productData);
 
         const productData2 = {
             name: "Vitor2",
@@ -46,17 +46,14 @@ describe('Get own products', () => {
             quantity: 2,
             sellerId: person.guid
         }
-        
-        const product2 = await productsRepository.registerProduct(productData2);
 
-        const products = await sut.execute({
+        await productsRepository.registerProduct(productData2);
+    
+        const { products } = await sut.execute({
             personGuid: person.guid,
             page: 1
-        });
-
+        }); 
+        
         expect(products).toHaveLength(2);
-        expect(product).toEqual(expect.objectContaining({
-            name: "Vitor"
-        }));
     });
 })

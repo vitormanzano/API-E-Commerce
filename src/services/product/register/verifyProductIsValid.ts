@@ -1,6 +1,6 @@
 import { verifyQuantityProduct } from "@/utils/verifyQuantityProduct";
-import { IRegisterProductServiceRequest } from "./register-product-service";
 import { verifyPriceProduct } from "@/utils/verifyPriceProduct";
+import { IRegisterProductServiceRequest } from "./models/IRegisterProductServiceRequest";
 
 export const verifyProductIsValid = async (productData: IRegisterProductServiceRequest) => {
     const quantityIsBiggerThanZero = await verifyQuantityProduct(productData.quantity);
