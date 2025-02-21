@@ -1,6 +1,7 @@
 import { Person, Prisma } from "@prisma/client";
 import { IPersonsRepository } from "../persons-repository-interface";
 import { prisma } from "@/lib/prisma";
+import { IFindNearbySeller } from "../models/IFindNearbySellers";
 
 export class PrismaPersonRepository implements IPersonsRepository {
     async findPersonByGuid(guid: string) {
@@ -30,9 +31,17 @@ export class PrismaPersonRepository implements IPersonsRepository {
             }
         });
 
-        return person
-
+        return person;
     }
+
+    async findNearbySellers({ latitude, longitude }: IFindNearbySeller): Promise<Person[]> {
+        const sellers = await prisma.$queryRaw<Person[]>`
+            SELECT * FROM "Person"
+            WHERE (6371 * acos (cos(radians(${latitude})) * cos( radians( latitude)) * cos( radians( longitude) - radians(${longitude})) + sin( radians(${latitude})) * sin( radians( latitude)))) <= 20 /* Where distance is fewer than 20km */
+        `
+        return sellers;
+    }
+
     async registerPerson(personData: Prisma.PersonCreateInput) { 
         const person = await prisma.person.create({
             data: personData
