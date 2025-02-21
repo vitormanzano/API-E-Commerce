@@ -54,9 +54,6 @@ export class InMemoryProductRepository implements IProductsRepository {
 
 
     async findProductsByPerson(guid: string, page: number) {
-        this.productList.forEach(product => {
-            console.log(product.sellerId);
-        });
         const products = this.productList.filter(product => product.sellerId === guid)
         .slice((page - 1 ) * 20, page * 20);
         

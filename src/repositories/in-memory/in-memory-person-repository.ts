@@ -2,6 +2,8 @@ import { Prisma, Person } from "@prisma/client";
 import { IPersonsRepository } from "../persons-repository-interface";
 import { randomUUID } from "crypto";
 import { Decimal } from "@prisma/client/runtime/library";
+import { IFindNearbySeller } from "../models/IFindNearbySellers";
+import { getDistanceBetweenCoordinates } from "@/utils/getDistanceBetweenCoordinates";
 
 export class InMemoryPersonRepository implements IPersonsRepository {
     private personList: Person[] = [];
@@ -67,5 +69,19 @@ export class InMemoryPersonRepository implements IPersonsRepository {
 
         return hasExistPerson;
     }
-    
+
+    async findNearbySellers(params: IFindNearbySeller): Promise<Person[]> {
+        return this.personList.filter( person => {
+            const distance = getDistanceBetweenCoordinates({
+                latitude: params.latitude,
+                longitude: params.longitude
+            },
+            {
+                latitude: Number(person.latitude),
+                longitude: Number(person.longitude),
+            });
+
+            return distance < 10;
+        });
+    }
 }
