@@ -12,6 +12,7 @@ import { getOwnProducts } from "./controllers/products/get-own-products";
 import { findAllProducts } from "./controllers/products/find-all-products";
 import { findProductsByName } from "./controllers/products/find-products-by-name";
 import { findNearbySellers } from "./controllers/persons/find-nearby-sellers/find-nearby-sellers";
+import { deleteProduct } from "./controllers/products/delete-product/delete-product";
 
 export async function personRoutes(app: FastifyInstance) {
     app.post('/person/register', registerPerson);
@@ -30,10 +31,13 @@ export async function personRoutes(app: FastifyInstance) {
 export async function productRoutes(app: FastifyInstance) {
     app.post('/product/register', {onRequest: verifyJWT} ,registerProduct);   
     app.patch('/product/update', {onRequest: verifyJWT}, updateProduct); 
+
     app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts);
 
     app.get('/product/search', findAllProducts);
 
     app.get('/product/searchName/:name', findProductsByName);
+
+    app.delete('/product/delete', {onRequest: verifyJWT}, deleteProduct)
 
 }
