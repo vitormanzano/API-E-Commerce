@@ -42,6 +42,17 @@ export class PrismaProductRepository implements IProductsRepository {
         return products;
     }
 
+    async deleteProductByGuid(sellerGuid: string, productGuid: string): Promise<Product> {
+        const product = await prisma.product.delete({
+            where: {
+                sellerId: sellerGuid,
+                guid: productGuid
+            }
+        });
+
+        return product;
+    }
+
     async updateProductByGuid(guid: string, productData: Prisma.ProductUpdateInput): Promise<Product | null> {
         const product = await prisma.product.update({
             where: {

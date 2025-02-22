@@ -1,23 +1,24 @@
-import { describe, it, beforeEach, expect } from "vitest";
+import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
+import { InMemoryProductRepository } from "@/repositories/in-memory/in-memory-product-repository";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { IProductsRepository } from "@/repositories/products-repository-interface";
-import { RegisterProductService } from "./register-product-service";
-import { InMemoryProductRepository } from "@/repositories/in-memory/in-memory-product-repository";
-import { InMemoryPersonRepository } from "@/repositories/in-memory/in-memory-person-repository";
 import { randomUUID } from "crypto";
+import { describe, beforeEach, it, expect } from "vitest";
+import { DeleteProductByGuidService } from "./delete-product-by-guid-service";
+import { ResourceNotFoundError } from "@/errors/resource-not-found-error";
 
 let productsRepository: IProductsRepository;
 let personsRepository: IPersonsRepository;
-let sut: RegisterProductService;
+let sut: DeleteProductByGuidService;
 
-describe('Register product service', () => {
+describe('Delete product by guid', () => {
     beforeEach(async () => {
         productsRepository = new InMemoryProductRepository();
         personsRepository = new InMemoryPersonRepository();
-        sut = new RegisterProductService(productsRepository);
+        sut = new DeleteProductByGuidService(productsRepository, personsRepository);
     });
 
-    it('Should be able to register a product', async () => {
+    it('Should be able to delete a product', async () => {
         const personData = {
             guid: randomUUID(),
             name: 'John doe',
@@ -36,12 +37,17 @@ describe('Register product service', () => {
             sellerId: person.guid
         }
         
-        const { product } = await sut.execute(productData);
+        const registeredProduct = await productsRepository.registerProduct(productData);
 
-        expect(product.guid).toEqual(expect.any(String));
+        const { deletedProduct } = await sut.execute({
+            personGuid: person.guid,
+            productGuid: registeredProduct.guid
+        });
+
+        expect(deletedProduct.guid).toEqual(registeredProduct.guid);
     });
 
-    it('Should not be able to register a product if quantity is fewer than 1', async () => {
+    it('Should not be able to delete a product if guid is incorrect', async () => {
         const personData = {
             guid: randomUUID(),
             name: 'John doe',
@@ -50,21 +56,27 @@ describe('Register product service', () => {
             latitude: -22.9482175,
             longitude: -47.0652211 
         }
-
         const person  = await personsRepository.registerPerson(personData);
 
         const productData = {
             name: "Vitor",
             description: "Something",
             price: 8.99,
-            quantity: 0,
+            quantity: 2,
             sellerId: person.guid
         }
+        
+        await productsRepository.registerProduct(productData);
 
-        expect(() => sut.execute(productData)).rejects.toBeInstanceOf(Error);
+        const newGuid = randomUUID();
+
+        expect(() => sut.execute({
+            personGuid: person.guid,
+            productGuid: newGuid
+        })). rejects.toBeInstanceOf(ResourceNotFoundError);
     });
 
-    it('Should not be able to register a product if price is fewer than 0', async () => {
+    it('Should not be able to delete a product if person dont have anyone product', async () => {
         const personData = {
             guid: randomUUID(),
             name: 'John doe',
@@ -73,17 +85,23 @@ describe('Register product service', () => {
             latitude: -22.9482175,
             longitude: -47.0652211 
         }
-
         const person  = await personsRepository.registerPerson(personData);
 
         const productData = {
             name: "Vitor",
             description: "Something",
-            price: 0,
-            quantity: 1,
-            sellerId: person.guid
+            price: 8.99,
+            quantity: 2,
+            sellerId: randomUUID() //Create a product but with a random guid!
         }
+        
+        const registeredProduct = await productsRepository.registerProduct(productData);
 
-        expect(() => sut.execute(productData)).rejects.toBeInstanceOf(Error);
-    })
-});
+        expect(() => sut.execute({
+            personGuid: person.guid,
+            productGuid: registeredProduct.guid
+        })).rejects.toBeInstanceOf(ResourceNotFoundError)
+    });
+
+
+})

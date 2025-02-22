@@ -7,4 +7,5 @@ export interface IProductsRepository {
     findProductsByPerson(guid: string, page: number): Promise<Product[]>
     findAllProducts(): Promise<Product[]>
     findProductByName(name: string): Promise<Product[]>
+    deleteProductByGuid(personGuid: string, productGuid: string): Promise<Product | undefined>
 }

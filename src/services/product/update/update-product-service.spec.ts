@@ -41,11 +41,40 @@ describe('Update a product', () => {
 
         const productDataForUpdate = {
             name: "Vitor Updated",
+            description: "Updated",
             sellerId: person.guid
         }
 
         await sut.execute(product.guid, productDataForUpdate);
-
         expect(product.name).toEqual("Vitor Updated");
     });
+
+    it('Should not be able to update a product if the product updated to price fewer or equal 0', async () => {
+        const personData = {
+            guid: randomUUID(),
+            name: 'John doe',
+            email: 'johndoe@gmail.com',
+            password: '123456',
+            latitude: -22.9482175,
+            longitude: -47.0652211 
+        }
+
+        const person = await personsRepository.registerPerson(personData);
+
+        const productData = {
+            name: "Vitor",
+            description: "Something",
+            price: 8.99,
+            quantity: 2,
+            sellerId: person.guid
+        }
+        const product = await productsRepository.registerProduct(productData);
+
+        const productDataForUpdate = {
+            price: 0,
+            sellerId: person.guid
+        }
+        expect(() => sut.execute(product.guid, productDataForUpdate)).rejects.toBeInstanceOf(Error); 
+        
+    })
 })
