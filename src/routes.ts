@@ -1,16 +1,16 @@
 import { FastifyInstance } from "fastify";
 import { registerPerson } from "./controllers/persons/register-person/register-person";
-import { registerProduct } from "./controllers/products/register-product";
+import { registerProduct } from "./controllers/products/register-product/register-product";
 import { authenticatePerson } from "./controllers/persons/authenticate-person/authenticate-person";
 import { deletePersonByGuid } from "./controllers/persons/delete-person/delete-person";
 import { refresh } from "./controllers/persons/refresh/refresh";
 import { profile } from "./controllers/persons/profile/profile";
 import { verifyJWT } from "./controllers/middlewares/verify-jwt";
 import { updatePerson } from "./controllers/persons/update-person/update-person";
-import { updateProduct } from "./controllers/products/update-product";
-import { getOwnProducts } from "./controllers/products/get-own-products";
-import { findAllProducts } from "./controllers/products/find-all-products";
-import { findProductsByName } from "./controllers/products/find-products-by-name";
+import { updateProduct } from "./controllers/products/update-product/update-product";
+import { getOwnProducts } from "./controllers/products/get-own-products/get-own-products";
+import { findAllProducts } from "./controllers/products/find-all-products/find-all-products";
+import { findProductsByName } from "./controllers/products/find-products-by-name/find-products-by-name";
 import { findNearbySellers } from "./controllers/persons/find-nearby-sellers/find-nearby-sellers";
 import { deleteProduct } from "./controllers/products/delete-product/delete-product";
 
