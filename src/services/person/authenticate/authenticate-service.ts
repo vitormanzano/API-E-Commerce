@@ -3,11 +3,14 @@ import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { IAuthenticatePersonServiceRequest } from "./models/IAuthenticatePersonServiceRequest";
 import { IAuthenticatePersonServiceResponse } from "./models/IAuthenticatePersonServiceResponse";
+import { verifyPasswordLength } from "@/utils/verifyPasswordLength";
 
 export class AuthenticatePersonService {
     constructor(private personsRepository: IPersonsRepository) {}
 
     async execute(authenticatePersonData: IAuthenticatePersonServiceRequest): Promise<IAuthenticatePersonServiceResponse> {
+        verifyPasswordLength(authenticatePersonData.password);
+
         const person = await this.personsRepository.findPersonByEmail(authenticatePersonData.email);
 
         if (!person) {
