@@ -37,6 +37,15 @@ describe('Authenticate person service', () => {
         expect(person.guid).toEqual(expect.any(String));
     });
 
+    it('Should not be able to authenticate if password had fewer than 6 characters', async () => {
+        const authenticateDataWithWrongPassword = {
+            email: 'johndoe@gmail.com',
+            password: '12345', 
+        }
+
+        await expect(() => sut.execute(authenticateDataWithWrongPassword)).rejects.toBeInstanceOf(InvalidCredentialsError);
+    });
+
     it('SHould not be able to authenticate with wrong email', async  () => {
         const personData = {
             guid: randomUUID(),
