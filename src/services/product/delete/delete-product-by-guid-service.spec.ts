@@ -15,7 +15,7 @@ describe('Delete product by guid', () => {
     beforeEach(async () => {
         productsRepository = new InMemoryProductRepository();
         personsRepository = new InMemoryPersonRepository();
-        sut = new DeleteProductByGuidService(productsRepository, personsRepository);
+        sut = new DeleteProductByGuidService(productsRepository);
     });
 
     it('Should be able to delete a product', async () => {

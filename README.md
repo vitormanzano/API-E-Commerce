@@ -20,7 +20,7 @@
  The person should also be able to:
  [x] - Create a product. </br>
  [x] - Update a product if it has been created by the person. </br>
- [] - Delete a product if it has been created by the person. </br>
+ [x] - Delete a product if it has been created by the person. </br>
  [] - Sell his product to other person. </br>
  [x] - Search products. </br>
  [x] - Get a list of her products. </br>
