@@ -29,7 +29,7 @@ describe('Register product service', () => {
 
         const { person } = await sut.execute({guid});
 
-        expect(person!.guid).toEqual(expect.any(String));
+        expect(person.guid).toEqual(expect.any(String));
     });
 
 })
