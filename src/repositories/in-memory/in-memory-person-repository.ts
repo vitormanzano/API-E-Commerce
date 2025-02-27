@@ -71,7 +71,9 @@ export class InMemoryPersonRepository implements IPersonsRepository {
     }
 
     async findNearbySellers(params: IFindNearbySeller): Promise<Person[]> {
-        return this.personList.filter( person => {
+        const userIndex = this.personList.findIndex(person => person.guid === params.personGuid);
+
+        let nearbySellersWithUser = this.personList.filter( person => {
             const distance = getDistanceBetweenCoordinates({
                 latitude: params.latitude,
                 longitude: params.longitude
@@ -83,5 +85,9 @@ export class InMemoryPersonRepository implements IPersonsRepository {
 
             return distance < 10;
         });
+
+        nearbySellersWithUser.splice(userIndex, 1);
+
+        return nearbySellersWithUser;
     }
 }

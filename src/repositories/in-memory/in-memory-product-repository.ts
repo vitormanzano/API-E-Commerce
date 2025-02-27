@@ -46,7 +46,7 @@ export class InMemoryProductRepository implements IProductsRepository {
         
         const productIndex = personProducts.findIndex(product => product.guid === productGuid);
 
-        this.productList.slice(productIndex, 1);
+        this.productList.splice(productIndex, 1);
 
         const product = personProducts.find(product => product.guid === productGuid);
 

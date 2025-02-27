@@ -1,15 +1,17 @@
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
-import { Person } from "@prisma/client";
+import { IFindNearbySellersServiceRequest } from "./models/IFindNearbySellesServiceRequest";
+import { IFindNearbySellersServiceResponse } from "./models/IFindNearbySellersServiceResponse";
 
 export class FindNearbySellersService {
     constructor(private personsRepository: IPersonsRepository) {}
 
-    async execute(latitude: number, longitude: number): Promise<Person[]> {
-        let persons = await this.personsRepository.findNearbySellers({
-            latitude,
-            longitude
+    async execute(personData: IFindNearbySellersServiceRequest): Promise<IFindNearbySellersServiceResponse> {
+        const nearbySellers = await this.personsRepository.findNearbySellers({
+            personGuid: personData.personGuid,
+            latitude: personData.latitude,
+            longitude: personData.longitude
         });
 
-        return persons;
+        return {nearbySellers};
     }
 }
