@@ -37,7 +37,8 @@ export class PrismaPersonRepository implements IPersonsRepository {
     async findNearbySellers({ latitude, longitude }: IFindNearbySeller): Promise<Person[]> {
         const sellers = await prisma.$queryRaw<Person[]>`
             SELECT * FROM "Person"
-            WHERE (6371 * acos (cos(radians(${latitude})) * cos( radians( latitude)) * cos( radians( longitude) - radians(${longitude})) + sin( radians(${latitude})) * sin( radians( latitude)))) <= 20 /* Where distance is fewer than 20km */
+            WHERE (6371 * acos (cos(radians(${latitude})) * cos( radians( latitude)) * cos( radians( longitude) - radians(${longitude})) + sin( radians(${latitude})) * sin( radians( latitude)))) <= 20 
+            AND latitude <> ${latitude} AND longitude <> ${longitude} /* Where distance is fewer than 20km */
         `
         return sellers;
     }
