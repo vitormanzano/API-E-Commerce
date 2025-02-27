@@ -56,4 +56,40 @@ describe('Get own products', () => {
         
         expect(products).toHaveLength(2);
     });
+
+    it('Should be able to paginate the own products', async () => {
+        const personData = {
+            guid: randomUUID(),
+            name: 'John doe',
+            email: 'johndoe@gmail.com',
+            password: '123456',
+            latitude: -22.9482175,
+            longitude: -47.0652211 
+        }
+
+        const person = await personsRepository.registerPerson(personData);
+
+        for (let i = 1; i <= 22; i++) {
+            await productsRepository.registerProduct({
+                name: `Vitor ${i}`,
+                description: `Something ${i}`,
+                price: 10.00,
+                quantity: 1,
+                sellerId: person.guid
+            });
+        }
+
+        const { products } = await sut.execute({
+            personGuid: person.guid,
+            page: 2
+        });
+
+        expect(products).toHaveLength(2);
+        expect(products).toEqual([
+            expect.objectContaining({ name: 'Vitor 21'}),
+            expect.objectContaining({ name: 'Vitor 22'})
+        ]);
+    });
+
+
 })

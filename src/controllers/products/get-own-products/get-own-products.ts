@@ -8,7 +8,7 @@ export const getOwnProducts = async (request: FastifyRequest, reply: FastifyRepl
         page: z.coerce.number().min(1).default(1),
     });
 
-    const { page } = getOwnProductsSchema.parse(request.query); 
+    const { page } = getOwnProductsSchema.parse(request.params); 
 
     try {
         const personGuid = request.user.sub;
