@@ -5,8 +5,8 @@ import { IFindAllProductsServiceResponse } from "./models/IFindAllProductsServic
 export class FindAllProductsService {
     constructor(private productsRepository: IProductsRepository) {}
 
-    async execute(): Promise<IFindAllProductsServiceResponse> {
-        const allProducts = await this.productsRepository.findAllProducts();
+    async execute(page: number): Promise<IFindAllProductsServiceResponse> {
+        const allProducts = await this.productsRepository.findAllProducts(page);
 
         if (allProducts.length === 0) {
             throw new ResourceNotFoundError();

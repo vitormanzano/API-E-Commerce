@@ -3,8 +3,14 @@ import { IProductsRepository } from "../products-repository-interface";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaProductRepository implements IProductsRepository {
-    async findAllProducts(): Promise<Product[]> {
-        const products = await prisma.product.findMany({})
+    async findAllProducts(page: number): Promise<Product[]> {
+        const products = await prisma.product.findMany({
+            orderBy: {
+                name: 'asc'
+            },
+            take: 20,
+            skip: (page - 1) * 20
+        });
 
         return products;
     }

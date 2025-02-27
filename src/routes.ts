@@ -34,7 +34,7 @@ export async function productRoutes(app: FastifyInstance) {
 
     app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts);
 
-    app.get('/product/search', findAllProducts);
+    app.get('/product/searchAll/:page', findAllProducts);
 
     app.get('/product/searchName/:name', findProductsByName);
 

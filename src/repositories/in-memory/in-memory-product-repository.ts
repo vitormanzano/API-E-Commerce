@@ -21,8 +21,8 @@ export class InMemoryProductRepository implements IProductsRepository {
         return product
     }  
 
-    async findAllProducts(): Promise<Product[]> {
-        return this.productList;
+    async findAllProducts(page: number): Promise<Product[]> {
+        return this.productList.slice((page - 1) * 20, page * 20);
     }
 
     async findProductByGuid(guid: string): Promise<Product | null> {
@@ -66,8 +66,8 @@ export class InMemoryProductRepository implements IProductsRepository {
 
 
     async findProductsByPerson(guid: string, page: number) {
-        const products = this.productList.filter(product => product.sellerId === guid)
-        .slice((page - 1 ) * 20, page * 20);
+        const products = this.productList.filter(product => product.sellerId === guid).
+        slice( (page - 1) * 20, page * 20);
         
         return products;
     }
