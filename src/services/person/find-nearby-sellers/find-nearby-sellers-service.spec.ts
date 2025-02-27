@@ -36,9 +36,9 @@ describe('Find nearby sellers service', () => {
             longitude: -47.0560172
         }
 
-        const seller = await personsRepository.registerPerson(sellerData);
+        const person = await personsRepository.registerPerson(personData);
 
-        await personsRepository.registerPerson(personData);
+        const seller = await personsRepository.registerPerson(sellerData);
 
         const productData = {
             name: "Vitor",
@@ -49,11 +49,61 @@ describe('Find nearby sellers service', () => {
         }
         
         await productsRepository.registerProduct(productData);
-
-        const nearbySellers = await sut.execute(personData.latitude, personData.longitude);
+            
+        const {nearbySellers} = await sut.execute(
+            {
+                personGuid: person.guid, 
+                latitude: personData.latitude, 
+                longitude: personData.longitude
+            });
         
-        expect(nearbySellers).toEqual([expect.objectContaining({ name: 'Doe john'})]);
-
+        expect(nearbySellers).toEqual([expect.objectContaining({ email: 'doejohn@gmail.com'})]);
     });
+
+    it('Should not be able to get nearby sellers with they far than 20km', async () => {    
+        const personData = {
+            guid: randomUUID(),
+            name: 'John doe',
+            email: 'johndoe@gmail.com',
+            password: '123456',
+            latitude: -22.950341,
+            longitude: -47.0554993 
+        }
+
+        const sellerDataClose = {
+            guid: randomUUID(),
+            name: 'Doe john',
+            email: 'doejohnClose@gmail.com',
+            password: '123457',
+            latitude: -22.9497337,
+            longitude: -47.0560172
+        }
+        const sellerDataFar = {
+            guid: randomUUID(),
+            name: 'Doe john',
+            email: 'doejohnFar@gmail.com',
+            password: '123457',
+            latitude: -22.6954627,
+            longitude: -47.0498513
+        }
+
+        const person = await personsRepository.registerPerson(personData);
+
+        await personsRepository.registerPerson(sellerDataClose);
+
+        await personsRepository.registerPerson(sellerDataFar);
+
+        const { nearbySellers } = await sut.execute(
+            {
+                personGuid: person.guid, 
+                latitude: personData.latitude, 
+                longitude: personData.longitude
+            });
+            
+        expect(nearbySellers).toHaveLength(1);
+        expect(nearbySellers).toEqual([
+            expect.objectContaining({ email: 'doejohnClose@gmail.com'})
+        ]);
+    })
 })
 
