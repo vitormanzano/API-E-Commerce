@@ -7,16 +7,10 @@ export const findNearbySellers = async (request: FastifyRequest, reply: FastifyR
     try {
         const guid = request.user.sub;
 
-        const getPersonProfileService = makeGetPersonProfileService();
-
-        const { person } = await getPersonProfileService.execute({guid});
-
         const findNearbySellersService = makeFindNearbySellersService();
 
         const { nearbySellers } = await findNearbySellersService.execute({
-            personGuid: person.guid,
-            latitude: Number(person.latitude),
-            longitude: Number(person.longitude)
+            personGuid: guid,
         })
 
         const sellersResponse = nearbySellers.map(seller => ({
