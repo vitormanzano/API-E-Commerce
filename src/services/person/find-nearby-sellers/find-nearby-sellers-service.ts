@@ -5,11 +5,17 @@ import { IFindNearbySellersServiceResponse } from "./models/IFindNearbySellersSe
 export class FindNearbySellersService {
     constructor(private personsRepository: IPersonsRepository) {}
 
-    async execute(personData: IFindNearbySellersServiceRequest): Promise<IFindNearbySellersServiceResponse> {
+    async execute({personGuid}: IFindNearbySellersServiceRequest): Promise<IFindNearbySellersServiceResponse> {
+        const person = await this.personsRepository.findPersonByGuid(personGuid);
+
+        if (!person) {
+            throw new Error();
+        }
+
         const nearbySellers = await this.personsRepository.findNearbySellers({
-            personGuid: personData.personGuid,
-            latitude: personData.latitude,
-            longitude: personData.longitude
+            personGuid: person.guid,
+            latitude: Number(person.latitude),
+            longitude: Number(person.longitude)
         });
 
         return {nearbySellers};
