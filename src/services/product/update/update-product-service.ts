@@ -1,17 +1,8 @@
 import { ResourceNotFoundError } from "@/errors/resource-not-found-error";
 import { IProductsRepository } from "@/repositories/products-repository-interface";
-import { Product } from "@prisma/client";
 import { verifyProductIsValid } from "../register/verifyProductIsValid";
-
-interface IUpdateProductServiceRequest {
-    productGuid: string,
-    fieldToUpdate: string,
-    valueToUpdate: any,
-}
-
-interface IUpdateProductServiceResponse {
-    updatedProduct: Product;
-}
+import { IUpdateProductServiceRequest } from "./models/IUpdateProductServiceRequest";
+import { IUpdateProductServiceResponse } from "./models/IUpdateProductServiceResponse";
 
 export class UpdateProductService {
     constructor(private productsRepository: IProductsRepository) {}
