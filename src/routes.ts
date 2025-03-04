@@ -1,12 +1,14 @@
 import { FastifyInstance } from "fastify";
-import { registerPerson } from "./controllers/persons/register-person/register-person";
-import { registerProduct } from "./controllers/products/register-product/register-product";
-import { authenticatePerson } from "./controllers/persons/authenticate-person/authenticate-person";
-import { deletePersonByGuid } from "./controllers/persons/delete-person/delete-person";
+import { verifyJWT } from "./controllers/middlewares/verify-jwt";
+
 import { refresh } from "./controllers/persons/refresh/refresh";
 import { profile } from "./controllers/persons/profile/profile";
-import { verifyJWT } from "./controllers/middlewares/verify-jwt";
+import { registerPerson } from "./controllers/persons/register-person/register-person";
+import { authenticatePerson } from "./controllers/persons/authenticate-person/authenticate-person";
+import { deletePersonByGuid } from "./controllers/persons/delete-person/delete-person";
 import { updatePerson } from "./controllers/persons/update-person/update-person";
+
+import { registerProduct } from "./controllers/products/register-product/register-product";
 import { updateProduct } from "./controllers/products/update-product/update-product";
 import { getOwnProducts } from "./controllers/products/get-own-products/get-own-products";
 import { findAllProducts } from "./controllers/products/find-all-products/find-all-products";
@@ -24,18 +26,16 @@ export async function personRoutes(app: FastifyInstance) {
     app.patch('/person/update', {onRequest: verifyJWT}, updatePerson);
     
     app.get('/me', {onRequest: verifyJWT}, profile)
-
     app.get('/person/nearbySellers', {onRequest: verifyJWT}, findNearbySellers)
 }
 
 export async function productRoutes(app: FastifyInstance) {
     app.post('/product/register', {onRequest: verifyJWT} ,registerProduct);   
+
     app.patch('/product/update', {onRequest: verifyJWT}, updateProduct); 
 
     app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts);
-
     app.get('/product/searchAll/:page', findAllProducts);
-
     app.get('/product/searchName/:name', findProductsByName);
 
     app.delete('/product/delete', {onRequest: verifyJWT}, deleteProduct)
