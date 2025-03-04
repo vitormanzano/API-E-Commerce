@@ -24,18 +24,17 @@ describe('Should be able to update a person', () => {
             longitude: -47.0652211 
         }
 
-        const createdPerson = await personsRepository.registerPerson(personData);
+        const person = await personsRepository.registerPerson(personData);
 
-        const personDataForUpdate = {
-            name: 'Doe john',
-            email: 'doejohn@gmail.com',
-            password: await hash('123457', 6),
-            latitude: -22.9482176,
-            longitude: -47.0652211 
-        }
+        const fieldToUpdate = 'name';
+        const valueToUpdate = 'Doe john updated'
 
-        const { updatedPerson } = await sut.execute(createdPerson.guid, personDataForUpdate);
+        await sut.execute({
+            personGuid: person.guid,
+            fieldToUpdate,
+            valueToUpdate
+        });
 
-        expect(updatedPerson.name).toEqual(personDataForUpdate.name);
+        expect(person.name).toEqual(valueToUpdate);;
     });
 })

@@ -59,16 +59,13 @@ export class PrismaProductRepository implements IProductsRepository {
         return product;
     }
 
-    async updateProductByGuid(guid: string, productData: Prisma.ProductUpdateInput): Promise<Product | null> {
+    async updateProductByGuid(productGuid: string, fieldToUpdate: string, valueToUpdate: string): Promise<Product | null> {
         const product = await prisma.product.update({
             where: {
-                guid
+                guid: productGuid
             },
             data: {
-                description: productData.description,
-                name: productData.name,
-                price: productData.price,
-                quantity: productData.quantity
+                [fieldToUpdate]: valueToUpdate
             }
         });
 

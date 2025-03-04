@@ -4,21 +4,18 @@ import * as z from "zod";
 import * as HttpResponse from "@/utils/http-helper";
 
 export const updateProduct = async (request: FastifyRequest, reply: FastifyReply) => {
-    const updateBodySchema = z.object({
+    const updateProductBodySchema = z.object({
         productGuid: z.string(),
-        name: z.optional(z.string()),
-        description: z.optional(z.string()),
-        price: z.optional(z.number()),
-        quantity: z.optional(z.number()),
-        sellerId: z.string().default(request.user.sub)
+        fieldToUpdate: z.string(),
+        valueToUpdate: z.string(),
     });
 
-    const updateProductBody = updateBodySchema.parse(request.body);
+    const {productGuid, fieldToUpdate, valueToUpdate} = updateProductBodySchema.parse(request.body);
 
     try {
         const updateProductService = makeUpdateProductService();
 
-        const product  = await updateProductService.execute(updateProductBody.productGuid, updateProductBody);
+        const product  = await updateProductService.execute({productGuid, fieldToUpdate, valueToUpdate});
 
         const httpResponse = await HttpResponse.ok({
             ...product,

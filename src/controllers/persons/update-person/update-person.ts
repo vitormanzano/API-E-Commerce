@@ -5,21 +5,19 @@ import * as HttpResponse from "@/utils/http-helper";
 
 export const updatePerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const updateBodySchema = z.object({
-        name: z.optional(z.string()),
-        email: z.optional(z.string().email("Digit a valid email!")),
-        password: z.optional(z.string()),
-        latitude: z.optional(z.number().min(-90).max(90)),
-        longitude: z.optional(z.number().min(-180).max(180))
+        fieldToUpdate: z.string(),
+        valueToUpdate: z.string(),
     });
 
-    const updatePersonBody = updateBodySchema.parse(request.body);
+    const {fieldToUpdate, valueToUpdate} = updateBodySchema.parse(request.body);
 
     try {
+
         const updatePersonService = makeUpdatePersonService();
 
-        const guid = request.user.sub;
+        const personGuid = request.user.sub;
 
-        const { updatedPerson }  = await updatePersonService.execute(guid, updatePersonBody);
+        const { updatedPerson }  = await updatePersonService.execute({personGuid, fieldToUpdate,valueToUpdate});
         
         const httpResponse = await HttpResponse.ok({
             ...updatedPerson,

@@ -51,17 +51,13 @@ export class PrismaPersonRepository implements IPersonsRepository {
         return person;
     }
 
-    async updatePersonByGuid(guid: string, personData: Prisma.PersonUpdateInput): Promise<Person | null> {
+    async updatePersonByGuid(personGuid: string, fieldToUpdate: string, valueToUpdate: string): Promise<Person | null> {
         const person = await prisma.person.update({
             where: {
-                guid
+                guid: personGuid
             },
             data: {
-                name: personData.name,
-                email: personData.email,
-                password: personData.password,
-                latitude: personData.latitude,
-                longitude: personData.longitude
+                [fieldToUpdate]: valueToUpdate
             }
         });
 
