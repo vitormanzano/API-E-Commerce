@@ -1,16 +1,7 @@
 import { InvalidCredentialsError } from "@/errors/invalid-credentials-error";
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
-import { Person } from "@prisma/client";
-
-interface IUpdatePersonServiceRequest {
-    personGuid: string,
-    fieldToUpdate: string,
-    valueToUpdate: any,
-}
-
-interface IUpdatePersonServiceResponse {
-    updatedPerson: Person;
-}
+import { IUpdatePersonServiceRequest } from "./models/IUpdatePersonServiceRequest";
+import { IUpdatePersonServiceResponse } from "./models/IUpdatePersonServiceResponse";
 
 export class UpdatePersonService {
     constructor(private personsRepository: IPersonsRepository) {}
