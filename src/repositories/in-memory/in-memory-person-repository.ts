@@ -8,13 +8,22 @@ import { getDistanceBetweenCoordinates } from "@/utils/getDistanceBetweenCoordin
 export class InMemoryPersonRepository implements IPersonsRepository {
     private personList: Person[] = [];
 
-    async updatePersonByGuid(guid: string, person: Prisma.PersonUncheckedCreateInput): Promise<Person | null> {
-        const personData = await this.findPersonByGuid(guid);
+    async updatePersonByGuid(personGuid: string, fieldToUpdate: string, valueToUpdate: any): Promise<Person | null> {
+        const personData = await this.findPersonByGuid(personGuid);
 
-        personData!.email = person.email;
-        personData!.name = person.name;
-        personData!.latitude = person.latitude as Decimal;
-        personData!.longitude = person.longitude as Decimal;
+        switch (fieldToUpdate) {
+            case 'name':
+                personData!.name = valueToUpdate as string;
+                break;
+            case 'email':
+                personData!.email = valueToUpdate as string;
+                break;
+            case 'latitude':
+                personData!.latitude = valueToUpdate as Decimal;
+                break;
+            case 'longitude':
+                personData!.longitude = valueToUpdate as Decimal;
+        }
 
         return personData;
     }

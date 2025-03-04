@@ -12,6 +12,7 @@ export class FindProductsByNameService {
         if (!products) {
             throw new ResourceNotFoundError();
         }
+        
         return { products };
     }
 }

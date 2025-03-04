@@ -4,11 +4,9 @@ import { Product } from "@prisma/client";
 import { verifyProductIsValid } from "../register/verifyProductIsValid";
 
 interface IUpdateProductServiceRequest {
-    name?: string,
-    description?: string,
-    price?: number,
-    quantity?: number
-    sellerId: string
+    productGuid: string,
+    fieldToUpdate: string,
+    valueToUpdate: any,
 }
 
 interface IUpdateProductServiceResponse {
@@ -18,24 +16,14 @@ interface IUpdateProductServiceResponse {
 export class UpdateProductService {
     constructor(private productsRepository: IProductsRepository) {}
 
-    async execute(guid: string, productData: IUpdateProductServiceRequest): Promise<IUpdateProductServiceResponse> {
-        if (productData.price != undefined) {
-            if (productData.price <= 0) {
-                throw new Error();
-            }
-        }
-
-        if (productData.quantity != undefined) {
-            if (productData.quantity <= 0) {
-                throw new Error();
-            }
-        }
-
-        const updatedProduct = await this.productsRepository.updateProductByGuid(guid, productData);
+    async execute({productGuid, fieldToUpdate, valueToUpdate}: IUpdateProductServiceRequest): Promise<IUpdateProductServiceResponse> {
+        const updatedProduct = await this.productsRepository.updateProductByGuid(productGuid, fieldToUpdate, valueToUpdate);
 
         if (!updatedProduct) {
             throw new ResourceNotFoundError();
         }
+
+        await verifyProductIsValid(updatedProduct);
 
         return { updatedProduct };
     }

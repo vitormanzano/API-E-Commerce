@@ -8,7 +8,7 @@ export const verifyProductIsValid = async (productData: IRegisterProductServiceR
     if (!quantityIsBiggerThanZero) {
         throw new Error('The quantity must be greater than 0.'); //Quantity needs to be bigger than 0
     }
-
+ 
     const priceIsBiggerThanZero = await verifyPriceProduct(productData.price);
 
     if (!priceIsBiggerThanZero) {

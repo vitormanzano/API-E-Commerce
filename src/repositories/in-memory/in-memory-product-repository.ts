@@ -53,13 +53,22 @@ export class InMemoryProductRepository implements IProductsRepository {
         return product;
     }
 
-    async updateProductByGuid(guid: string, productData: Prisma.ProductUncheckedCreateInput): Promise<Product | null> {
-        const product = await this.findProductByGuid(guid);
+    async updateProductByGuid(productGuid: string, fieldToUpdate: string, valueToUpdate: any): Promise<Product | null> {
+        const product = await this.findProductByGuid(productGuid);
 
-        product!.name = productData.name;
-        product!.description = productData.description;
-        product!.price = productData.price;
-        product!.quantity = productData.quantity;
+        switch (fieldToUpdate) {
+                   case 'name':
+                       product!.name = valueToUpdate as string;
+                       break;
+                   case 'description':
+                       product!.description = valueToUpdate as string;
+                       break;
+                   case 'price':
+                       product!.price = valueToUpdate as number;
+                       break;
+                   case 'quantity':
+                       product!.quantity = valueToUpdate as number;
+               }
 
         return product;
     }

@@ -3,11 +3,9 @@ import { IPersonsRepository } from "@/repositories/persons-repository-interface"
 import { Person } from "@prisma/client";
 
 interface IUpdatePersonServiceRequest {
-    email?: string,
-    name?: string,
-    password?: string,
-    latitude?: number,
-    longitude?: number
+    personGuid: string,
+    fieldToUpdate: string,
+    valueToUpdate: any,
 }
 
 interface IUpdatePersonServiceResponse {
@@ -17,8 +15,8 @@ interface IUpdatePersonServiceResponse {
 export class UpdatePersonService {
     constructor(private personsRepository: IPersonsRepository) {}
 
-    async execute(guid: string, person: IUpdatePersonServiceRequest): Promise<IUpdatePersonServiceResponse> {
-        const updatedPerson = await this.personsRepository.updatePersonByGuid(guid, person)
+    async execute({personGuid, fieldToUpdate, valueToUpdate}: IUpdatePersonServiceRequest): Promise<IUpdatePersonServiceResponse> {
+        const updatedPerson = await this.personsRepository.updatePersonByGuid(personGuid, fieldToUpdate, valueToUpdate)
         
         if (!updatedPerson) {
             throw new InvalidCredentialsError()
