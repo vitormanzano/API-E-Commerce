@@ -1,4 +1,4 @@
-export interface IGetOwnProductsServiceRequest {
+export interface IFindOwnProductsServiceRequest {
     personGuid: string,
     page: number
 }

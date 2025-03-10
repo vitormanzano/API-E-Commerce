@@ -10,7 +10,7 @@ import { updatePerson } from "./controllers/persons/update-person/update-person"
 
 import { registerProduct } from "./controllers/products/register-product/register-product";
 import { updateProduct } from "./controllers/products/update-product/update-product";
-import { getOwnProducts } from "./controllers/products/get-own-products/get-own-products";
+import { findOwnProducts } from "./controllers/products/find-own-products/find-own-products";
 import { findAllProducts } from "./controllers/products/find-all-products/find-all-products";
 import { findProductsByName } from "./controllers/products/find-products-by-name/find-products-by-name";
 import { findNearbySellers } from "./controllers/persons/find-nearby-sellers/find-nearby-sellers";
@@ -35,7 +35,7 @@ export async function productRoutes(app: FastifyInstance) {
 
     app.patch('/product/update', {onRequest: verifyJWT}, updateProduct); 
 
-    app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts);
+    app.get('/product/search/:page', {onRequest: verifyJWT} , findOwnProducts);
     app.get('/product/searchAll/:page', findAllProducts);
     app.get('/product/searchName/:name', findProductsByName);
     app.get('/product/nearbyProducts', {onRequest: verifyJWT}, findNearbyProducts);
