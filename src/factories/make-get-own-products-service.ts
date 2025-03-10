@@ -1,9 +1,9 @@
 import { PrismaProductRepository } from "@/repositories/prisma/prisma-products-repository";
-import { GetOwnProductsService } from "@/services/product/get-own-products/get-own-products-service";
+import { FindOwnProductsService } from "@/services/product/get-own-products/find-own-products-service";
 
-export function makeGetOwnProductsService() {
+export function findGetOwnProductsService() {
     const prismaRepository = new PrismaProductRepository();
-    const getOwnProductsService = new GetOwnProductsService(prismaRepository);
+    const findOwnProductsService = new FindOwnProductsService(prismaRepository);
 
-    return getOwnProductsService;
+    return findOwnProductsService;
 }
