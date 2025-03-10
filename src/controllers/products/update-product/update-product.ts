@@ -25,6 +25,7 @@ export const updateProduct = async (request: FastifyRequest, reply: FastifyReply
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     } 
     catch (error) {
-        return reply.status(401).send({ message: "Erro" })
+        const httpResponse = await HttpResponse.badRequest(error);
+        return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }

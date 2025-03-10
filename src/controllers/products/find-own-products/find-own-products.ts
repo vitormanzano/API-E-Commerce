@@ -23,7 +23,7 @@ export const findOwnProducts = async (request: FastifyRequest, reply: FastifyRep
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     } 
     catch (error) {
-        const httpResponse = await HttpResponse.badRequest({ message: "Erro" });
+        const httpResponse = await HttpResponse.badRequest(error);
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }
