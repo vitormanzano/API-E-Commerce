@@ -28,7 +28,7 @@ export const updatePerson = async (request: FastifyRequest, reply: FastifyReply)
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
     catch (error) {
-        const httpResponse = await HttpResponse.badRequest({ message: "Not should be able to update a person"});
+        const httpResponse = await HttpResponse.badRequest(error);
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 }
