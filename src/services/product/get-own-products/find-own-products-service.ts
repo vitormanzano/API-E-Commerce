@@ -1,13 +1,12 @@
-import { ResourceNotFoundError } from "@/errors/resource-not-found-error";
 import { IProductsRepository } from "@/repositories/products-repository-interface";
-import { IGetOwnProductsServiceRequest } from "./models/IGetOwnProductsServiceRequest";
-import { IGetOwnProductsServiceResponse } from "./models/IGetOwnProductsServiceResponse";
+import { IFindOwnProductsServiceRequest } from "./models/IGetOwnProductsServiceRequest";
+import { IFindOwnProductsServiceResponse } from "./models/IGetOwnProductsServiceResponse";
 import { verifyProductIsUndefinedOrVoid } from "@/utils/verifyProductIsVoidOrUndefined";
 
-export class GetOwnProductsService {
+export class FindOwnProductsService {
     constructor(private productsRepository: IProductsRepository) {}
 
-    async execute({ personGuid, page }: IGetOwnProductsServiceRequest): Promise<IGetOwnProductsServiceResponse> {
+    async execute({ personGuid, page }: IFindOwnProductsServiceRequest): Promise<IFindOwnProductsServiceResponse> {
         const products = await this.productsRepository.findProductsByPerson(personGuid, page);
 
         verifyProductIsUndefinedOrVoid(products)

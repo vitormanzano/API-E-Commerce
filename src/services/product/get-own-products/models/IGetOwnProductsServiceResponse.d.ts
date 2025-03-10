@@ -1,5 +1,5 @@
 import { Product } from "@prisma/client";
 
-export interface IGetOwnProductsServiceResponse {
+export interface IFindOwnProductsServiceResponse {
     products: Product[];
 }
