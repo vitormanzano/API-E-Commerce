@@ -51,13 +51,16 @@ describe('Find all products', () => {
         
         await productsRepository.registerProduct(productData2);
 
-        const { allProducts } = await sut.execute(1);
+        const page = 1
+
+        const { allProducts } = await sut.execute({page});
     
         expect(allProducts).toHaveLength(2);
     });
 
     it('Should not be able to find products if not exist anyone product', async () => {
-        await expect( () => sut.execute(1)).rejects.toBeInstanceOf(ResourceNotFoundError);
+        const page = 1;
+        await expect( () => sut.execute({page})).rejects.toBeInstanceOf(ResourceNotFoundError);
     });
 
     
