@@ -15,6 +15,7 @@ import { findAllProducts } from "./controllers/products/find-all-products/find-a
 import { findProductsByName } from "./controllers/products/find-products-by-name/find-products-by-name";
 import { findNearbySellers } from "./controllers/persons/find-nearby-sellers/find-nearby-sellers";
 import { deleteProduct } from "./controllers/products/delete-product/delete-product";
+import { findNearbyProducts } from "./controllers/products/find-nearby-products/find-nearby-products";
 
 export async function personRoutes(app: FastifyInstance) {
     app.post('/person/register', registerPerson);
@@ -37,7 +38,10 @@ export async function productRoutes(app: FastifyInstance) {
     app.get('/product/search/:page', {onRequest: verifyJWT} , getOwnProducts);
     app.get('/product/searchAll/:page', findAllProducts);
     app.get('/product/searchName/:name', findProductsByName);
+    app.get('/product/nearbyProducts', {onRequest: verifyJWT}, findNearbyProducts);
 
-    app.delete('/product/delete', {onRequest: verifyJWT}, deleteProduct)
+    app.delete('/product/delete', {onRequest: verifyJWT}, deleteProduct);
+
+
 
 }
