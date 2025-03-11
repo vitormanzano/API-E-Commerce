@@ -5,10 +5,10 @@ import * as HttpResponse from "@/utils/http-helper";
 
 export const registerProduct = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({
-        name: z.string().min(1, "Name is mandatory"),
-        description: z.string(),
-        price: z.number(),
-        quantity: z.number(),
+        name: z.string().min(5, "Name should've more than 5 characters"),
+        description: z.string().min(15, "Description should've more than 15 characters"),
+        price: z.number().min(0.1, "Price should've more than 0"),
+        quantity: z.number().min(1, "Quantity should've more than 0"),
         sellerId: z.string().default(request.user.sub)
     });
 
