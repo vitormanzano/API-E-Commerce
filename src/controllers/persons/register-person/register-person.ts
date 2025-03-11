@@ -6,7 +6,7 @@ import * as HttpResponse from "@/utils/http-helper";
 
 export const registerPerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const registerBodySchema = z.object({
-        name: z.string().min(1, "Name is mandatory"),
+        name: z.string().min(5, "Name should've more than 5 characters"),
         email: z.string().email("Digit a valid email!"),
         password: z.string(),
         latitude: z.number().min(-90).max(90),
