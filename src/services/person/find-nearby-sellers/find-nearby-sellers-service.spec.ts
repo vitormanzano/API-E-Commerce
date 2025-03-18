@@ -53,8 +53,6 @@ describe('Find nearby sellers service', () => {
         const {nearbySellers} = await sut.execute(
             {
                 personGuid: person.guid, 
-                latitude: personData.latitude, 
-                longitude: personData.longitude
             });
         
         expect(nearbySellers).toEqual([expect.objectContaining({ email: 'doejohn@gmail.com'})]);
@@ -96,8 +94,6 @@ describe('Find nearby sellers service', () => {
         const { nearbySellers } = await sut.execute(
             {
                 personGuid: person.guid, 
-                latitude: personData.latitude, 
-                longitude: personData.longitude
             });
             
         expect(nearbySellers).toHaveLength(1);
