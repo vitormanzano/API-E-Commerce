@@ -102,6 +102,6 @@ describe('Delete product by guid', () => {
             productGuid: registeredProduct.guid
         })).rejects.toBeInstanceOf(ResourceNotFoundError)
     });
-
+    
 
 })
