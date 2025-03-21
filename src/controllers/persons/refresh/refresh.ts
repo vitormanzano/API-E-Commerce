@@ -1,5 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as HttpResponse from "@/utils/http-helper";
+import { createToken } from "@/controllers/middlewares/createToken";
+import { createRefreshToken } from "@/controllers/middlewares/createRefreshToken";
 
 export const refresh = async (request: FastifyRequest, reply: FastifyReply) => {
     await request.jwtVerify({ onlyCookie: true });
@@ -7,24 +9,9 @@ export const refresh = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
         const person = request.user.sub;
 
-        const token = await reply.jwtSign(
-            {},
-            {
-                sign: {
-                    sub: person
-                }
-            }
-        )
+        const token = await createToken(person, reply);
 
-        const refreshToken = await reply.jwtSign(
-            {},
-            {
-                sign: {
-                    sub: person,
-                    expiresIn: '7d'
-                }
-            }
-        )
+        const refreshToken = await createRefreshToken(person, reply);
 
         const httpResponse = await HttpResponse.ok(token);
 

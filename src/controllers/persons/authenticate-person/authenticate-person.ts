@@ -2,6 +2,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import * as z from "zod";
 import { makeAuthenticatePersonService } from "@/factories/make-authenticate-person-service";
 import * as HttpResponse from "@/utils/http-helper";
+import { createToken } from "@/controllers/middlewares/createToken";
+import { createRefreshToken } from "@/controllers/middlewares/createRefreshToken";
 
 export const authenticatePerson = async (request: FastifyRequest, reply: FastifyReply) => {
     const authenticateBodySchema = z.object({
@@ -16,24 +18,9 @@ export const authenticatePerson = async (request: FastifyRequest, reply: Fastify
 
         const { person } = await authenticatePersonService.execute(authenticatePersonBody);
 
-        const token = await reply.jwtSign(
-            {},
-            {
-                sign: {
-                    sub: person.guid
-                }
-            }
-        )
+        const token = await createToken(person.guid, reply);
 
-        const refreshToken = await reply.jwtSign(
-            {},
-            {
-                sign: {
-                    sub: person.guid,
-                    expiresIn: '7d'
-                }
-            }
-        );
+        const refreshToken = await createRefreshToken(person.guid, reply);
 
         const httpResponse = await HttpResponse.ok(token);
 
