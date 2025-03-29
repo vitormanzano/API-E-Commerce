@@ -1,6 +1,7 @@
 import { IPersonsRepository } from "@/repositories/persons-repository-interface";
 import { IFindNearbySellersServiceRequest } from "./models/IFindNearbySellesServiceRequest";
 import { IFindNearbySellersServiceResponse } from "./models/IFindNearbySellersServiceResponse";
+import { fixingSellersResponse } from "./fixingSellersResponse";
 
 export class FindNearbySellersService {
     constructor(private personsRepository: IPersonsRepository) {}
@@ -12,12 +13,14 @@ export class FindNearbySellersService {
             throw new Error();
         }
 
-        const nearbySellers = await this.personsRepository.findNearbySellers({
+        const nearbySellersResponse = await this.personsRepository.findNearbySellers({
             personGuid: person.guid,
             latitude: Number(person.latitude),
             longitude: Number(person.longitude)
         });
 
-        return {nearbySellers};
+        const nearbySellers = await fixingSellersResponse(nearbySellersResponse);
+
+        return { nearbySellers };
     }
 }
