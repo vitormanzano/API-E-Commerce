@@ -10,18 +10,20 @@ export class FindNearbyProductsService {
     async execute(personGuid: string): Promise<IFindNearbyProductsServiceResponse> {
         const person = await this.personsRepository.findPersonByGuid(personGuid);
 
-        if (!person) {
-            throw new Error();
-        }
+        // if (!person) {
+        //     throw new Error();
+        // }
 
         const nearbySellers = await this.personsRepository.findNearbySellers({
             personGuid,
-            latitude: Number(person.latitude),
-            longitude: Number(person.longitude)
+            latitude: Number(person!.latitude),
+            longitude: Number(person!.longitude)
         });
 
+        const page = 1;
+
         const nearbyProducts = (await Promise.all(nearbySellers.flatMap(person => 
-            this.productsRepository.findProductsByPerson(person.guid, 1)
+            this.productsRepository.findProductsByPerson(person.guid, page)
         ))).flat();
 
         return { nearbyProducts } 
