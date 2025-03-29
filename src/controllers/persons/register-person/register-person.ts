@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify"
 import * as z from "zod";
 import { makeRegisterPersonService } from "@/factories/make-register-person-service";
 import * as HttpResponse from "@/utils/http-helper";
+import { formatPersonResponse } from "@/controllers/formatPersonResponse";
 
 
 export const registerPerson = async (request: FastifyRequest, reply: FastifyReply) => {
@@ -20,13 +21,10 @@ export const registerPerson = async (request: FastifyRequest, reply: FastifyRepl
 
         const { person } = await registerPersonService.execute(registerPersonBody);
 
-        const httpResponse = await HttpResponse.created({
-            person: {
-                ...person,
-                guid: undefined,
-                password: undefined
-            }
-        })
+        const refactoredPerson = await formatPersonResponse(person);
+
+        const httpResponse = await HttpResponse.created(refactoredPerson);
+
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
     }
 

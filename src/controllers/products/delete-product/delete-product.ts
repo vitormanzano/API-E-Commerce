@@ -23,7 +23,6 @@ export const deleteProduct = async (request: FastifyRequest, reply: FastifyReply
         const httpResponse = await HttpResponse.ok({
             ...deletedProduct,
             sellerId: undefined
-            
         });
 
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
