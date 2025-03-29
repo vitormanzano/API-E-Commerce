@@ -12,7 +12,7 @@ export const findAllProducts = async (request: FastifyRequest, reply: FastifyRep
     try {
         const findAllProductsService = makeFindAllProductsService();
 
-        const { allProducts } = await findAllProductsService.execute(page);
+        const { allProducts } = await findAllProductsService.execute({page});
 
         const httpResponse = await HttpResponse.ok(allProducts);
 

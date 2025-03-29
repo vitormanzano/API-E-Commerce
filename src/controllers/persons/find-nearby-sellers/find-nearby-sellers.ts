@@ -1,5 +1,4 @@
 import { makeFindNearbySellersService } from "@/factories/make-find-nearby-sellers-service";
-import { makeGetPersonProfileService } from "@/factories/make-get-person-profile-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as HttpResponse from "@/utils/http-helper";
 
@@ -12,14 +11,9 @@ export const findNearbySellers = async (request: FastifyRequest, reply: FastifyR
         const { nearbySellers } = await findNearbySellersService.execute({
             personGuid: guid,
         })
-
-        const sellersResponse = nearbySellers.map(seller => ({
-            name: seller.name,
-            email: seller.email
-        }));
-        
+ 
         const httpResponse = await HttpResponse.ok({
-            sellers: sellersResponse
+            sellers: nearbySellers
         });
 
         return reply.status(httpResponse.statusCode).send(httpResponse.body);
