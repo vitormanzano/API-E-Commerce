@@ -22,6 +22,7 @@ export const refresh = async (request: FastifyRequest, reply: FastifyReply) => {
             sameSite: true,
             httpOnly: true
         })
+        
         .status(httpResponse.statusCode).send(httpResponse.body);
     }
 
