@@ -56,23 +56,26 @@ export class InMemoryProductRepository implements IProductsRepository {
     async updateProductByGuid(productGuid: string, fieldToUpdate: string, valueToUpdate: any): Promise<Product | null> {
         const product = await this.findProductByGuid(productGuid);
 
+        if (!product) {
+            return null;
+        }
+
         switch (fieldToUpdate) {
-                   case 'name':
-                       product!.name = valueToUpdate as string;
-                       break;
-                   case 'description':
-                       product!.description = valueToUpdate as string;
-                       break;
-                   case 'price':
-                       product!.price = valueToUpdate as number;
-                       break;
-                   case 'quantity':
-                       product!.quantity = valueToUpdate as number;
-               }
+            case 'name':
+                product!.name = valueToUpdate as string;
+                break;
+            case 'description':
+                product!.description = valueToUpdate as string;
+                break;
+            case 'price':
+                product!.price = valueToUpdate as number;
+                break;
+           case 'quantity':
+                product!.quantity = valueToUpdate as number;
+        }
 
         return product;
     }
-
 
     async findProductsByPerson(guid: string, page: number) {
         const products = this.productList.filter(product => product.sellerId === guid).
