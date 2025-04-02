@@ -8,4 +8,5 @@ export interface IProductsRepository {
     findAllProducts(page: number): Promise<Product[]>
     findProductByName(name: string): Promise<Product[]>
     deleteProductByGuid(personGuid: string, productGuid: string): Promise<Product | undefined>
+    buyProduct(quantity: number, product: Product): Promise<Product>
 }

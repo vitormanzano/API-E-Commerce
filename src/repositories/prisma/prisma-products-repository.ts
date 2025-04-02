@@ -79,4 +79,18 @@ export class PrismaProductRepository implements IProductsRepository {
                 
             return product;
     }
+
+    async buyProduct(quantity: number, product: Product): Promise<Product> {
+        const updatedProduct = await prisma.product.update({
+            where: {
+                guid: product.guid
+            },
+            data: {
+                quantity: product.quantity - quantity
+            }
+        });
+
+        return updatedProduct
+
+    }
 }
