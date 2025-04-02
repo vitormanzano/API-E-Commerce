@@ -2,7 +2,7 @@ import { makeUpdatePersonService } from "@/factories/make-update-person-service"
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as z from "zod";
 import * as HttpResponse from "@/utils/http-helper";
-import { formatPersonResponse } from "@/controllers/formatPersonResponse";
+import { formatPersonResponse } from "@/controllers/persons/formatPersonResponse";
 import { format } from "path";
 
 export const updatePerson = async (request: FastifyRequest, reply: FastifyReply) => {

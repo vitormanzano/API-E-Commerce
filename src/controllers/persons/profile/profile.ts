@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { makeGetPersonProfileService } from "@/factories/make-get-person-profile-service";
 import * as HttpResponse from "@/utils/http-helper";
-import { formatPersonResponse } from "@/controllers/formatPersonResponse";
+import { formatPersonResponse } from "@/controllers/persons/formatPersonResponse";
 
 export const profile = async (request: FastifyRequest, reply: FastifyReply) => {
    try {
