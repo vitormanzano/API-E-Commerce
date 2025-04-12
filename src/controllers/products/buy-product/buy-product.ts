@@ -15,17 +15,17 @@ export const buyProduct = async (request: FastifyRequest, reply: FastifyReply) =
     try {
         const buyProductService = makeBuyProductService();
 
-        const productAfterBuy = await buyProductService.execute({productGuid, buyerGuid, quantity});
-        console.log(productAfterBuy);
+        await buyProductService.execute({productGuid, buyerGuid, quantity});
+        
         const httpResponse = await HttpResponse.ok({
-            message: "Congratulations!"
+            message: "Congratulations! You bought a new item!"
         })
 
         return reply.status(httpResponse.statusCode).send(httpResponse.body)
     } 
     catch (error) {
         const httpResponse = await HttpResponse.badRequest({
-            message: error
+        message: "Something is wrong..."
         })
 
         return reply.status(httpResponse.statusCode).send(httpResponse.body)
