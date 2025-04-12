@@ -43,6 +43,6 @@ export async function productRoutes(app: FastifyInstance) {
 
     app.delete('/product/delete', {onRequest: verifyJWT}, deleteProduct);
 
-    app.patch('/products/buy', {onRequest: verifyJWT} ,buyProduct)
+    app.patch('/product/buy', {onRequest: verifyJWT} ,buyProduct)
 
 }

@@ -1,4 +1,4 @@
-import { Prisma, Product } from "@prisma/client";
+import { Buy, Prisma, Product } from "@prisma/client";
 import { IProductsRepository } from "../products-repository-interface";
 import { prisma } from "@/lib/prisma";
 
@@ -59,7 +59,7 @@ export class PrismaProductRepository implements IProductsRepository {
         return product;
     }
 
-    async updateProductByGuid(productGuid: string, fieldToUpdate: string, valueToUpdate: string): Promise<Product | null> {
+    async updateProductByGuid(productGuid: string, fieldToUpdate: string, valueToUpdate: any): Promise<Product | null> {
         const product = await prisma.product.update({
             where: {
                 guid: productGuid
@@ -80,17 +80,14 @@ export class PrismaProductRepository implements IProductsRepository {
             return product;
     }
 
-    async buyProduct(quantity: number, product: Product): Promise<Product> {
-        const updatedProduct = await prisma.product.update({
-            where: {
-                guid: product.guid
-            },
+    async buyProduct(productGuid: string, buyerGuid: string, quantity: number): Promise<Buy> {
+        const buyData = await prisma.buy.create({
             data: {
-                quantity: product.quantity - quantity
+                personId: buyerGuid,
+                productId: productGuid
             }
-        });
-
-        return updatedProduct
-
+        })
+        console.log(buyData);
+        return buyData
     }
 }
