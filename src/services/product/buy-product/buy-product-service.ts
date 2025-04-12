@@ -19,8 +19,8 @@ export class BuyProductService {
         
         const updateProduct = await this.productsRepository.updateProductByGuid(productGuid, "quantity", quantity)
 
-        const buyData = await this.productsRepository.buyProduct(productGuid, buyerGuid ,quantity);
+        await this.productsRepository.buyProduct(productGuid, buyerGuid ,quantity);
         
-        return { buyData }
+        return { updateProduct }
     }
 }

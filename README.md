@@ -26,7 +26,7 @@
  [x] - Get a list of her products. </br>
  [] - Get a list of your his former sales. </br>
  [] - Get a list of your buys. </br>
- [] - Get a list of products from their closest salespeople.
+ [x] - Get a list of products from their closest salespeople.
   
  
 ## How to use
